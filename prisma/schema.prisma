@@ -32,6 +32,44 @@ model User {
   permissions          Permission[]
   AmountsMovements     AdminMovementsAmounts[]
   coupons              Coupon[]
+  Site                 Site[]
+}
+
+model Site {
+  id            String   @id @default(cuid())
+  name          String?
+  description   String?  @db.Text
+  logo          String?  @db.Text
+  font          String   @default("font-cal")
+  image         String?  @db.Text
+  imageBlurhash String?  @db.Text
+  subdomain     String?  @unique
+  customDomain  String?  @unique
+  message404    String?  @db.Text
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  user          User?    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId        Int?
+  Post          Post[]
+
+  @@index([userId])
+}
+
+model Post {
+  id          String   @id @default(cuid())
+  title       String?  @db.Text
+  description String?  @db.Text
+  content     String?  @db.Text
+  slug        String   @default(cuid())
+  image       String?  @db.Text
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  published   Boolean  @default(false)
+  site        Site?    @relation(fields: [siteId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  siteId      String?
+
+  @@unique([slug, siteId])
+  @@index([siteId])
 }
 
 model StripeCustomer {
