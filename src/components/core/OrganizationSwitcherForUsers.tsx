@@ -29,12 +29,9 @@ function OrganizationsSwitcherForUser() {
 
   if (user?.organizationMemberships.length === 0) return null;
 
-  console.log(organization);
-
   return (
     <div>
       <Select
-        
         onValueChange={handleOrgChange}
         placeholder={organization?.name ?? "Perfil personal"}
       >

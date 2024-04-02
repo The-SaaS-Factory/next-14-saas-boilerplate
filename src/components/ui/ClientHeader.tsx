@@ -2,7 +2,11 @@
 import { useSidebarState } from "@/states/ui/sidebarState";
 import useDarkTheme from "@/app/hooks/useDarkTheme";
 import useSuperAdmin from "@/app/hooks/useSuperAdmin";
-import { OrganizationSwitcher, UserButton, useOrganization } from "@clerk/nextjs";
+import {
+  OrganizationSwitcher,
+  UserButton,
+  useOrganization,
+} from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import Bars3Icon from "@heroicons/react/24/outline/Bars3Icon";
 import Link from "next/link";
@@ -10,7 +14,7 @@ import { BellIcon } from "@heroicons/react/24/outline";
 import useMembership from "@/app/hooks/useMembership";
 import UpgradeteButton from "../core/UpgradeteButton";
 
-const AdminHeader = ({
+const ClientHeader = ({
   notificationsCount,
 }: {
   notificationsCount: number;
@@ -103,4 +107,4 @@ const AdminHeader = ({
   );
 };
 
-export default AdminHeader;
+export default ClientHeader;

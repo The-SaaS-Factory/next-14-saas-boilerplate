@@ -11,13 +11,13 @@ import {
 } from "@heroicons/react/24/outline";
 import { useSidebarState } from "@/states/ui/sidebarState";
 import Navigation from "../core/Navigation";
-import { adminNavigation } from "../layouts/AdminLayout";
 import Link from "next/link";
 import { OrganizationSwitcher, useOrganization } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import useDarkTheme from "@/app/hooks/useDarkTheme";
+import { clientNavigation } from "../layouts/ClientLayout";
 
-const AdminSidebar = () => {
+const ClientSidebar = () => {
   const { isDarkTheme } = useDarkTheme();
   const { toggleSidebarMenu, isSidebarMenuOpen } = useSidebarState(
     ({ toggleSidebarMenu, isSidebarMenuOpen }) => ({
@@ -111,7 +111,7 @@ const AdminSidebar = () => {
                       <li>
                         {organization && (
                           <ul role="list" className=" space-y-1">
-                            <Navigation navigation={adminNavigation} />
+                            <Navigation navigation={clientNavigation} />
                           </ul>
                         )}
                       </li>
@@ -181,7 +181,7 @@ const AdminSidebar = () => {
               <li>
                 {organization && (
                   <ul role="list" className=" space-y-1">
-                    <Navigation navigation={adminNavigation} />
+                    <Navigation navigation={clientNavigation} />
                   </ul>
                 )}
               </li>
@@ -230,4 +230,4 @@ const AdminSidebar = () => {
   );
 };
 
-export default AdminSidebar;
+export default ClientSidebar;
