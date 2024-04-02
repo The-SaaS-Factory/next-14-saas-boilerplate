@@ -1,0 +1,54 @@
+{
+  "name": "hostingClan",
+  "version": "1.2.3",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "npx prisma db push  && npx prisma generate && next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "prisma": {
+    "seed": "ts-node  src/seed/seed.ts"
+  },
+  "dependencies": {
+    "@clerk/nextjs": "^4.29.6",
+    "@clerk/themes": "^1.7.9",
+    "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^2.1.1",
+    "@prisma/client": "^5.8.1",
+    "@react-google-maps/api": "^2.19.2",
+    "@tremor/react": "^3.13.3",
+    "@vercel/analytics": "^1.1.2",
+    "imagekit": "^4.1.4",
+    "next": "14.1.0",
+    "react": "^18",
+    "react-confetti": "^6.1.0",
+    "react-dom": "^18",
+    "react-floating-whatsapp": "^5.0.8",
+    "react-hook-form": "^7.49.2",
+    "react-images-uploading": "^3.1.7",
+    "react-slick": "^0.30.1",
+    "react-use": "^17.5.0",
+    "slick-carousel": "^1.8.1",
+    "sonner": "^1.2.4",
+    "stripe": "^14.10.0",
+    "svix": "^1.15.0",
+    "use-debounce": "^10.0.0",
+    "zustand": "^4.4.7"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/react-slick": "^0.23.13",
+    "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.4",
+    "postcss": "^8",
+    "prisma": "^5.7.1",
+    "tailwindcss": "^3.3.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5"
+  }
+}

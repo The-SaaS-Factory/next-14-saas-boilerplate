@@ -1,0 +1,561 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id                   Int                     @id @default(autoincrement())
+  externalId           String?                 @unique
+  email                String?                 @db.VarChar(255)
+  name                 String?                 @db.VarChar(255)
+  avatar               String?                 @db.VarChar(255)
+  createdAt            DateTime                @default(now())
+  updatedAt            DateTime                @updatedAt
+  Amounts              UserAmounts[]
+  UserSetting          UserSetting[]
+  refer                Referral[]              @relation("refer")
+  referredBy           Referral[]              @relation("referred")
+  Notification         Notification[]
+  Membership           Membership[]
+  UserStatus           UserStatus[]
+  UserNotes            UserNotes[]
+  invoices             Invoice[]
+  UserCapabilities     UserCapabilities[]
+  SupportTicket        SupportTicket[]
+  SupportTicketMessage SupportTicketMessage[]
+  StripeCustomer       StripeCustomer[]
+  permissions          Permission[]
+  AmountsMovements     AdminMovementsAmounts[]
+  coupons              Coupon[]
+}
+
+model StripeCustomer {
+  id         Int      @id @default(autoincrement())
+  customerId String   @unique
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     Int
+
+  @@index([userId])
+}
+
+model Invoice {
+  id                     Int              @id @default(autoincrement())
+  type                   InvoiceModelType @default(MEMBERSHIP)
+  membershipId           Int? //Type: Membership
+  serviceId              Int? //Type: Service
+  status                 InvoiceStatus    @default(PENDING)
+  userId                 Int?             @db.Integer
+  currencyId             Int              @default(1)
+  userCustomerExternalId String?          @db.VarChar(512)
+  gateway                String?          @db.VarChar(56)
+  gatewayId              String?          @db.VarChar(512)
+  details                String?          @db.VarChar(512)
+  invoiceUrl             String?          @db.VarChar(512)
+  invoicePdfUrl          String?          @db.VarChar(512)
+  subscriptionExternalId String?          @db.VarChar(512)
+  paidAt                 DateTime?
+  notifiedAt             DateTime?
+  dueAt                  DateTime?
+  createdAt              DateTime         @default(now())
+  updatedAt              DateTime         @updatedAt
+  user                   User?            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Currency               AdminCurrencies  @relation(fields: [currencyId], references: [id])
+  Items                  InvoiceItem[]
+  coupons                Coupon[]
+
+  @@index([userId, currencyId, serviceId])
+}
+
+model Coupon {
+  id                Int              @id @default(autoincrement())
+  userId            Int?
+  name              String
+  code              String           @unique
+  amountOff         Float?
+  duration          CouponDuration   @default(FOREVER)
+  durationInMonths  Int?
+  maxRedemptions    Int?
+  percentOff        Float?
+  status            String           @default("ACTIVE")
+  user              User?            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  AdminCurrencies   AdminCurrencies? @relation(fields: [adminCurrenciesId], references: [id])
+  adminCurrenciesId Int?
+  settings          CouponSettings[]
+  invoices          Invoice[]
+
+  @@index([userId])
+}
+
+model CouponSettings {
+  id        Int      @id @default(autoincrement())
+  couponId  Int
+  coupon    Coupon   @relation(fields: [couponId], references: [id], onDelete: Cascade)
+  name      String
+  value     String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([couponId])
+}
+
+enum CouponDuration {
+  FOREVER
+  ONCE
+  REPEATING
+}
+
+model PaymentMethod {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  image       String?
+  currencies  String?  @db.Text
+  status      String   @default("ACTIVE")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model InvoiceItem {
+  id          Int      @id @default(autoincrement())
+  invoiceId   Int
+  name        String
+  description String?
+  modelType   String?
+  modelId     Int?
+  pricingBdId Int?
+  pricingId   String?
+  images      String?  @db.Text
+  quantity    Int
+  price       Float
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  Invoice     Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+
+  @@index([invoiceId])
+}
+
+//Model user status
+model UserStatus {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(255)
+  description String?  @db.VarChar(512)
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  statusUntil DateTime
+
+  @@index([userId])
+}
+
+model Membership {
+  id               Int              @id @default(autoincrement())
+  userId           Int              @unique
+  plan             Plan             @relation(fields: [planId], references: [id], onDelete: Cascade)
+  planId           Int
+  pricingId        Int?
+  pricing          Pricing?         @relation(fields: [pricingId], references: [id], onDelete: Cascade)
+  currencyId       Int?             @default(1)
+  currency         AdminCurrencies? @relation(fields: [currencyId], references: [id])
+  startDate        DateTime
+  endDateFreeTrial DateTime?
+  endDate          DateTime
+  createdAt        DateTime         @default(now())
+  user             User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, pricingId])
+}
+
+model Plan {
+  id               Int                @id @default(autoincrement())
+  name             String
+  stripeProductId  String?
+  status           String             @default("ACTIVE")
+  description      String?            @db.Text
+  Membership       Membership[]
+  PlanCapabilities PlanCapabilities[]
+  Permission       Permission[]
+  pricing          Pricing[]
+}
+
+model Pricing {
+  id         Int              @id @default(autoincrement())
+  frequency  frequencyType    @default(YEARLY)
+  status     String           @default("ACTIVE")
+  price      Float
+  oldPrice   Float?
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+  Plan       Plan?            @relation(fields: [planId], references: [id], onDelete: Cascade)
+  planId     Int?
+  serviceId  Int?
+  settings   PricingSetting[]
+  Membership Membership[]
+
+  @@index([planId, serviceId])
+}
+
+model PricingSetting {
+  id           Int      @id @default(autoincrement())
+  settingName  String
+  settingValue String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  Pricing      Pricing? @relation(fields: [pricingId], references: [id])
+  pricingId    Int?
+
+  @@index([pricingId])
+}
+
+//*************************** ACL ***************************// 
+model Module {
+  id          Int          @id @default(autoincrement())
+  name        String
+  scope       ScopeType    @default(SUPERADMIN)
+  status      Status       @default(ACTIVE)
+  description String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  Permission  Permission[]
+}
+
+model Permission {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  users       User[]
+  Module      Module[]
+  Plan        Plan[]
+}
+
+//*************************** END ACL ***************************//
+
+model AdminKpi {
+  id        Int      @id @default(autoincrement())
+  name      String
+  type      String
+  value     Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Referral {
+  id         Int  @id @default(autoincrement())
+  refer      User @relation("refer", fields: [referId], references: [id], onDelete: Cascade)
+  referId    Int
+  referred   User @relation("referred", fields: [referredId], references: [id])
+  referredId Int
+
+  @@index([referId, referredId])
+}
+
+model Capabilitie {
+  id               Int                @id @default(autoincrement())
+  name             String
+  title            String?
+  description      String?            @db.Text
+  type             String             @default("LIMIT")
+  PlanCapabilities PlanCapabilities[]
+  UserCapabilities UserCapabilities[]
+}
+
+model PlanCapabilities {
+  id            Int         @id @default(autoincrement())
+  capabilitieId Int
+  planId        Int
+  count         Int
+  name          String?
+  plan          Plan        @relation(fields: [planId], references: [id], onDelete: Cascade)
+  capabilitie   Capabilitie @relation(fields: [capabilitieId], references: [id], onDelete: Cascade)
+
+  @@index([planId, capabilitieId])
+}
+
+model UserCapabilities {
+  id            Int         @id @default(autoincrement())
+  capabilitieId Int
+  userId        Int
+  count         Int
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  capabilitie   Capabilitie @relation(fields: [capabilitieId], references: [id], onDelete: Cascade)
+
+  @@index([userId, capabilitieId])
+}
+
+model UserSetting {
+  id           Int    @id @default(autoincrement())
+  user         User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       Int
+  settingName  String @db.VarChar(128)
+  settingValue String @db.Text
+
+  @@index([userId])
+}
+
+model SuperAdminSetting {
+  id           Int    @id @default(autoincrement())
+  settingName  String @db.VarChar(128)
+  settingValue String @db.Text
+}
+
+model CronJobs {
+  id        Int      @id @default(autoincrement())
+  name      String
+  error     String?  @db.Text
+  excuteAt  DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UserNotes {
+  id        Int               @id @default(autoincrement())
+  user      User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  scope     UserNoteScopeType @default(PLATFORM)
+  userId    Int
+  noteName  String            @db.VarChar(128)
+  noteValue String
+
+  @@index([userId])
+}
+
+model Notification {
+  id        Int              @id @default(autoincrement())
+  userId    Int
+  content   String
+  image     String
+  viewed    Boolean          @default(false)
+  type      NotificationType
+  createdAt DateTime         @default(now())
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model AdminCurrencies {
+  id                    Int                     @id @default(autoincrement())
+  name                  String                  @db.VarChar(11)
+  main                  Int                     @default(0)
+  code                  String                  @db.VarChar(11)
+  rate                  Float
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime                @updatedAt
+  UserAmounts           UserAmounts[]
+  AdminMovementsAmounts AdminMovementsAmounts[]
+  invoices              Invoice[]
+  Membership            Membership[]
+  Coupon                Coupon[]
+}
+
+model UserAmounts {
+  id             Int             @id @default(autoincrement())
+  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId         Int
+  Currency       AdminCurrencies @relation(fields: [currencyId], references: [id])
+  currencyId     Int             @default(1)
+  amount         Float           @default(0)
+  amount_pending Float           @default(0)
+  amount_stopad  Float           @default(0)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  @@index([userId])
+  @@index([currencyId])
+}
+
+model AdminMovementsAmounts {
+  id         BigInt             @id @default(autoincrement())
+  userId     Int?
+  user       User?              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  details    String             @db.VarChar(128)
+  Currency   AdminCurrencies    @relation(fields: [currencyId], references: [id])
+  currencyId Int
+  amount     Float
+  type       MovementAmountType @default(CREDIT)
+  status     Status             @default(COMPLETED)
+  createdAt  DateTime           @default(now())
+  updatedAt  DateTime           @updatedAt
+
+  @@index([currencyId])
+}
+
+model SupportTicket {
+  id          Int                     @id @default(autoincrement())
+  subject     String
+  departament SupportDepartamentType  @default(SALES)
+  status      SupportTicketStatusType @default(OPEN)
+  userId      Int?
+  user        User?                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime                @default(now())
+  updatedAt   DateTime                @updatedAt
+
+  SupportTicketMessage SupportTicketMessage[]
+
+  @@index([userId])
+}
+
+model SupportTicketMessage {
+  id                          Int                           @id @default(autoincrement())
+  ticketId                    Int
+  userId                      Int?
+  ticket                      SupportTicket                 @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  user                        User?                         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt                   DateTime                      @default(now())
+  updatedAt                   DateTime                      @updatedAt
+  SupportTicketMessageContent SupportTicketMessageContent[]
+
+  @@index([ticketId, userId])
+}
+
+model SupportTicketMessageContent {
+  id        Int                    @id @default(autoincrement())
+  messageId Int
+  type      PublicationContentType @default(TEXT)
+  ticket    SupportTicketMessage   @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  content   String                 @db.Text
+  createdAt DateTime               @default(now())
+  updatedAt DateTime               @updatedAt
+
+  @@index([messageId])
+}
+
+//Car rental 
+
+enum SupportDepartamentType {
+  BILLING
+  SALES
+  SUPPORT
+}
+
+enum SupportTicketStatusType {
+  OPEN
+  UNDER_REVIEW
+  AWAITING_RESPONSE
+  CLOSED
+  REOPENED
+  CANCELED
+}
+
+enum MarketingEmailListType {
+  PLATFORM
+  CHURCH
+  MINISTRY
+  BUSINESS
+  ARTIST
+  OTHER
+}
+
+enum MovementAmountType {
+  DEBIT
+  CREDIT
+}
+
+enum InvoiceModelType {
+  MEMBERSHIP
+  SERVICE
+  DEPOSIT
+}
+
+enum UserNoteScopeType {
+  PERSON
+  CHURCH
+  MINISTRY
+  BUSINESS
+  ARTIST
+  PLATFORM
+}
+
+enum NotificationType {
+  MESSAGE
+  MENTION
+  FOLLOW
+  ALERT
+  ACCOUNT
+  PUBLICATION
+}
+
+enum PublicationStatus {
+  DRAFT
+  PUBLISHED
+  DELETED
+  PENDING
+  INACTIVE
+}
+
+enum PublicationContentType {
+  TEXT
+  VIDEO
+  GALLERY
+  LINK
+  CUSTOM
+  DISCUSSION
+}
+
+enum PublicationType {
+  STATUS
+  VIDEO
+  ARTICLE
+  EVENT
+  BIBLE
+  NOTICE
+  ORATION
+  ADS
+  DISCUSSION
+}
+
+enum PublicationFunctionType {
+  POST
+  COMMENT
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
+  PENDING
+  COMPLETED
+  DRAFT
+}
+
+enum InvoiceStatus {
+  DRAFT
+  PENDING
+  PAID
+  EXPIRED
+}
+
+enum ScopeType {
+  USER
+  CLIENT
+  ADMIN
+  SUPERADMIN
+}
+
+enum frequencyType {
+  TRIENNIALLY
+  BIANNUAL
+  QUARTERLY
+  YEARLY
+  SEMIANNUAL
+  MONTHLY
+  BIMONTHLY
+  WEEKLY
+  DAILY
+  LIFETIME
+}
+
+enum ServiceType {
+  HOSTING
+  VPS
+  LICENSING
+  DOMAIN
+  DEVELOPMENT
+  DESIGN
+  MARKETING
+  CONSULTING
+}

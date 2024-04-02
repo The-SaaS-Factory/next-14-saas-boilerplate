@@ -1,0 +1,35 @@
+{
+  "New Layout": {
+    "prefix": "newLayout",
+    "body": [
+      "import React, { ReactNode } from 'react';",
+      "import PageName from '@/components/ui/commons/PageName';",
+      "import SuperAdminSettingsTabs from './ui/SuperAdminSettingsTabs';",
+      "",
+      "const SettingRoot = ({ children }: { children: ReactNode }) => {",
+      "  return (",
+      "    <div>",
+      "      <PageName",
+      "        name={'Settings'}",
+      "        breadcrumbs={[",
+      "          {",
+      "            name: 'Home',",
+      "            href: '/home',",
+      "          },",
+      "          {",
+      "            name: 'Settings',",
+      "            href: '/home/settings',",
+      "          },",
+      "        ]}",
+      "      />",
+      "      <SuperAdminSettingsTabs />",
+      "      <div>{children}</div>",
+      "    </div>",
+      "  );",
+      "};",
+      "",
+      "export default SettingRoot;"
+    ],
+    "description": "Create a new Boilplate layout"
+  }
+}

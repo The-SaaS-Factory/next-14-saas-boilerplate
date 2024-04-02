@@ -1,0 +1,48 @@
+@keyframes lights {
+  0% {
+    color: hsl(201, 71%, 49%);
+    text-shadow: 0 0 1em hsla(193, 90%, 57%, 0.2),
+      0 0 0.125em hsla(197, 66%, 54%, 0.3),
+      -1em -0.125em 0.5em hsla(190, 98%, 82%, 0),
+      1em 0.125em 0.5em hsla(200, 99%, 68%, 0);
+  }
+
+  30% {
+    color: hsl(201, 67%, 44%);
+    text-shadow: 0 0 1em hsla(188, 97%, 55%, 0.5),
+      0 0 0.125em hsla(194, 100%, 67%, 0.5),
+      -0.5em -0.125em 0.25em hsla(197, 95%, 68%, 0.2),
+      0.5em 0.125em 0.25em hsla(200, 100%, 60%, 0.4);
+  }
+
+  40% {
+    color: hsl(201, 73%, 42%);
+    text-shadow: 0 0 1em hsla(152, 84%, 45%, 0.5),
+      0 0 0.125em hsla(210, 57%, 70%, 0.5) -0.25em -0.125em 0.125em
+        hsla(0, 0%, 0%, 0.2),
+      0.25em 0.125em 0.125em hsla(200, 100%, 60%, 0.4);
+  }
+
+  70% {
+    color: hsl(201, 78%, 40%);
+    text-shadow: 0 0 1em hsla(200, 33%, 56%, 0.5),
+      0 0 0.125em hsla(205, 89%, 49%, 0.5),
+      0.5em -0.125em 0.25em hsla(203, 48%, 90%, 0.2),
+      -0.5em 0.125em 0.25em hsla(200, 100%, 60%, 0.4);
+  }
+
+  100% {
+    color: hsl(201, 92%, 33%);
+    text-shadow: 0 0 1em hsla(195, 88%, 56%, 0.2) 0 0 0.125em
+        hsla(187, 82%, 47%, 0.3),
+      1em -0.125em 0.5em hsla(40, 100%, 60%, 0),
+      -1em 0.125em 0.5em hsla(200, 100%, 60%, 0);
+  }
+}
+
+h1 {
+  margin: auto;
+  font-size: 3.5rem;
+  font-weight: 300;
+  animation: lights 5s 750ms linear infinite;
+}

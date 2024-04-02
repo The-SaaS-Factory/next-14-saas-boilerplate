@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+
+/* Custom styles */
+
+.mega-title {
+  @apply text-5xl font-bold tracking-tight text-primary sm:text-5xl;
+}
+
+.text-title {
+  @apply text-2xl font-bold leading-7 text-gray-700 dark:text-white sm:truncate sm:text-3xl sm:tracking-tight;
+}
+
+.text-subtitle {
+  @apply text-xl text-gray-600 dark:text-gray-400;
+}
+
+.text-secundary {
+  @apply text-base  text-gray-500 dark:text-gray-400;
+}
+
+.border-primary {
+  @apply border-sky-500;
+}
+
+.btn-main {
+  @apply px-3 py-2 font-medium text-sm text-gray-800 rounded-md border shadow-sm shadow-gray-300 border-gray-50 bg-gradient-to-bl from-slate-50 via-gray-100 to-gray-100 hover:via-gray-100 active:from-gray-400   dark:bg-gradient-to-bl dark:from-gray-900 dark:via-gray-900 dark:to-black dark:text-gray-200 hover:dark:from-gray-700 hover:dark:via-gray-800 hover:dark:to-gray-700;
+}
+.btn-main-selected {
+  @apply px-3 py-2 font-medium text-sm text-gray-800 rounded-md border shadow-sm shadow-gray-600 border-gray-100 bg-gradient-to-bl from-slate-100 via-gray-200 to-gray-200 hover:via-gray-200 active:from-gray-800   dark:bg-gradient-to-bl dark:from-gray-600 dark:via-gray-600 dark:to-black dark:text-gray-200 hover:dark:from-gray-700 hover:dark:via-gray-600 hover:dark:to-gray-700;
+}
+
+.btn-icon {
+  @apply flex  space-x-2 btn-main;
+}
+
+.input-text {
+  @apply block bg-main text-primary w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm;
+}
+
+.magic-link li {
+  @apply text-sky-500 font-medium hover:text-sky-700 dark:text-gray-400;
+}
+
+.magic-link li:before {
+  @apply mr-2 text-sky-500;
+  content: "✓";
+}
+
+.badge-sky {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-sky-100 text-sky-800 shadow-sky-800/50 shadow-sm;
+}
+
+.badge-green {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800 shadow-green-800/50 shadow-sm;
+}
+
+.badge-red {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-red-100 text-red-800 shadow-red-800/50 shadow-sm;
+}
+
+.badge-orange {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-orange-200 text-orange-800 shadow-orange-800/50 shadow-sm;
+}
+
+.badge-yellow {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-yellow-100 text-yellow-700 shadow-yellow-700/50 shadow-sm;
+}
+
+.badge-paid {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800 shadow-green-800/50 shadow-sm;
+}
+.badge-pending {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-orange-100 text-yellow-800 shadow-yellow-800/50 shadow-sm;
+}
+
+/* Main Theme light - dark mode */
+/* dark:from-gray-900 dark:via-slate-950 dark:to-gray-950 */
+.bg-main {
+  @apply bg-gradient-to-bl from-white via-white to-white dark:bg-gradient-to-bl dark:from-[#161616] dark:via-[#1b1b1b] dark:to-[#161616];
+}
+
+.bg-main-hover {
+  @apply hover:bg-gradient-to-bl hover:from-slate-100 hover:via-gray-200 hover:to-gray-300 hover:dark:from-gray-700 hover:dark:via-gray-800 hover:dark:to-gray-700;
+}
+
+.bg-main-background {
+  @apply flex
+  justify-center
+  items-center
+  h-screen
+  bg-gradient-to-r
+  from-green-100
+  to-blue-200
+  via-pink-50
+  text-white;
+}
+
+.bg-main-selected {
+  @apply bg-gradient-to-bl from-slate-100 via-gray-200 to-gray-200 dark:bg-gradient-to-bl dark:from-gray-600 dark:via-gray-700 dark:to-gray-700;
+}
+
+.text-primary {
+  @apply text-gray-700 text-sm  font-medium leading-6 dark:text-gray-200;
+}
+.text-primary-hover {
+  @apply hover:text-gray-700 font-medium leading-6 dark:text-gray-200;
+}
+.text-primary-selected {
+  @apply text-gray-700 text-sm font-bold leading-6 dark:text-gray-200;
+}
+
+.active-tab {
+  @apply text-sky-700 text-base  font-bold leading-6 dark:text-gray-200;
+}
+
+/* Carusel */
+.embla {
+  --slide-spacing: 1rem;
+  --slide-size: 100%;
+  --slide-height: 19rem;
+  padding: 1.6rem;
+}
+.embla__viewport {
+  overflow: hidden;
+}
+.embla__container {
+  backface-visibility: hidden;
+  display: flex;
+  touch-action: pan-y;
+}
+.embla__slide {
+  flex: 0 0 var(--slide-size);
+  min-width: 0;
+  padding-left: var(--slide-spacing);
+  position: relative;
+}
+ 
+
+
+@tailwind utilities;

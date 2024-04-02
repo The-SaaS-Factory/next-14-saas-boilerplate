@@ -1,0 +1,25 @@
+{
+	"New Page": {
+	  "prefix": "newPage",
+	  "body": [
+		"import PageName from \"@/components/ui/commons/PageName\";",
+		"import React from \"react\";",
+		"import { Metadata } from \"next\";",
+		"",
+		"export const metadata: Metadata = {",
+		"  title: \"${1:Page Title}\",",
+		"};",
+		"",
+		"const ${2:PageName} = () => {",
+		"  return (",
+		"    <div>",
+		"      <PageName name={\"${1:Page Title}\"} />",
+		"    </div>",
+		"  );",
+		"};",
+		"",
+		"export default ${2:PageName};"
+	  ],
+	  "description": "Create a new Boilplate page"
+	}
+  }
