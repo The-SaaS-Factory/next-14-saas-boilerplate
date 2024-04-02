@@ -13,7 +13,7 @@ export async function generateMetadata({
   const domain = decodeURIComponent(params.domain);
 
   console.log(domain);
-  
+
   const data = await getSiteData(domain);
   if (!data) {
     return null;
@@ -69,7 +69,7 @@ export default async function SiteLayout({
 
   if (!data) {
     console.log("not found");
-    
+
     notFound();
   }
 
