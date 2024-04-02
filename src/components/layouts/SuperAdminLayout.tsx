@@ -1,4 +1,6 @@
 import {
+  BuildingLibraryIcon,
+  CreditCardIcon,
   DocumentTextIcon,
   HomeIcon,
   TicketIcon,
@@ -25,18 +27,18 @@ export const superAdminNavigation = [
   {
     sectionName: "Billing",
     items: [
-      // {
-      //   name: "Plans",
-      //   href: "/admin/billing/plans/plans",
-      //   icon: CreditCardIcon,
-      //   current: true,
-      // },
-      // {
-      //   name: "Subscriptions",
-      //   href: "/admin/billing/subscriptions",
-      //   icon: BuildingLibraryIcon,
-      //   current: false,
-      // },
+      {
+        name: "Plans",
+        href: "/admin/billing/plans/plans",
+        icon: CreditCardIcon,
+        current: true,
+      },
+      {
+        name: "Subscriptions",
+        href: "/admin/billing/subscriptions",
+        icon: BuildingLibraryIcon,
+        current: false,
+      },
       {
         name: "Invoices",
         href: "/admin/billing/invoices",

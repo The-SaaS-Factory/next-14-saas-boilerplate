@@ -1,6 +1,6 @@
 {
-  "name": "hostingClan",
-  "version": "1.2.3",
+  "name": "next-14-fullstack-saas-boilerplate",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
     "dev": "next dev",

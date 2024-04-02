@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
+  provider  = "mysql"
   url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
@@ -48,10 +48,10 @@ model StripeCustomer {
 model Invoice {
   id                     Int              @id @default(autoincrement())
   type                   InvoiceModelType @default(MEMBERSHIP)
-  membershipId           Int? //Type: Membership
-  serviceId              Int? //Type: Service
+  membershipId           Int?
+  serviceId              Int?
   status                 InvoiceStatus    @default(PENDING)
-  userId                 Int?             @db.Integer
+  userId                 Int?
   currencyId             Int              @default(1)
   userCustomerExternalId String?          @db.VarChar(512)
   gateway                String?          @db.VarChar(56)
@@ -143,7 +143,6 @@ model InvoiceItem {
   @@index([invoiceId])
 }
 
-//Model user status
 model UserStatus {
   id          Int      @id @default(autoincrement())
   name        String   @db.VarChar(255)
@@ -238,7 +237,6 @@ model Permission {
 }
 
 //*************************** END ACL ***************************//
-
 model AdminKpi {
   id        Int      @id @default(autoincrement())
   name      String
