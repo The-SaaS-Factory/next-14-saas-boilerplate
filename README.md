@@ -78,6 +78,7 @@ Our vision is that a programmer with a regular job can, with this boilerplate, l
  - [x] Membership plan capabilities support
  - [x] User Onboarding
  - [x] SEO friendly (SSR by Next 14)
+ - [x] Vercel Analytic integration
 
 
 ## Road map
