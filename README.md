@@ -77,6 +77,7 @@ Our vision is that a programmer with a regular job can, with this boilerplate, l
  - [x] Subscriptions plans management
  - [x] Membership plan capabilities support
  - [x] User Onboarding
+ - [x] SEO friendly (SSR by Next 14)
 
 
 ## Road map
