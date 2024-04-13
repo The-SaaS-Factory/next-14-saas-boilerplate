@@ -1,4 +1,6 @@
+import { constants } from "@/lib/constants";
 import Image from "next/image";
+const isDemoMode = constants.demoMode;
 
 const UserCard = ({ user }: { user: any }) => (
   <div>
@@ -16,7 +18,9 @@ const UserCard = ({ user }: { user: any }) => (
         <div className="font-medium  ">
           {user.name} ({user.id})
         </div>
-        <div className="mt-1 text-gray-500">{user.email}</div>
+        <div className="mt-1 text-gray-500">
+          {!isDemoMode ? user.email : "In demo mode, email is hidden, :)"}
+        </div>
       </div>
     </div>
   </div>
