@@ -65,7 +65,7 @@ export default async function SiteLayout({
   children: ReactNode;
 }) {
   const domain = decodeURIComponent(params.domain);
-  const data = await getSiteData(domain);
+  const data: any = await getSiteData(domain);
 
   if (!data) {
     console.log("not found");
