@@ -9,6 +9,7 @@ import {
   PhotoIcon,
 } from "@heroicons/react/24/outline";
 import ImageUploading from "react-images-uploading";
+import { constants } from "@/lib/constants";
 
 type FormInfo = {
   name: string;
@@ -989,7 +990,6 @@ import {
   parseSettingDataOnSubmit,
 } from "@/utils/facades/frontendFacades/formFacade";
 import TableLoaderSkeleton from "../ui/loaders/TableLoaderSkeleton";
-import { constants } from "buffer";
 
 export function MapSelector({
   openModal,
