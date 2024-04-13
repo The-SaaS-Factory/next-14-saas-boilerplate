@@ -16,6 +16,7 @@ import Link from "next/link";
 import { OrganizationSwitcher   } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import useDarkTheme from "@/app/hooks/useDarkTheme";
+import { constants } from "@/lib/constants";
 
 const AdminSidebar = () => {
   const { isDarkTheme } = useDarkTheme();
@@ -89,7 +90,7 @@ const AdminSidebar = () => {
                         height={145}
                         width={145}
                         className="w-1/2 h-auto  "
-                        src="/assets/img/logoh.png"
+                        src={constants.logoUrl}
                         alt="Boilerplate"
                       />
                     </Link>
@@ -168,7 +169,7 @@ const AdminSidebar = () => {
                 width={145}
                 height={145}
                 className="h-auto pt-1 w-1/2"
-                src="/assets/img/logo.png"
+                src={constants.logoUrl}
                 alt="Boilerplate"
               />
             </Link>
