@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-import prisma from "@/lib/db";
 import { getPostData, getSiteData } from "@/lib/fetchers";
 
 export async function generateMetadata({
@@ -14,10 +13,13 @@ export async function generateMetadata({
     getPostData(domain, slug),
     getSiteData(domain),
   ]);
+  
   if (!data || !siteData) {
     return null;
   }
-  const { title, description } = data;
+  //const { title, description } = data;
+  const title = "test";
+  const description = "test";
 
   return {
     title,
@@ -43,35 +45,42 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  const allPosts = await prisma.post.findMany({
-    select: {
-      slug: true,
-      site: {
-        select: {
-          subdomain: true,
-          customDomain: true,
-        },
-      },
-    },
-    // feel free to remove this filter if you want to generate paths for all posts
-    where: {
-      site: {
-        subdomain: "demo",
-      },
-    },
-  });
+  // const allPosts = await prisma.post.findMany({
+  //   select: {
+  //     slug: true,
+  //     site: {
+  //       select: {
+  //         subdomain: true,
+  //         customDomain: true,
+  //       },
+  //     },
+  //   },
+  //   where: {
+  //     site: {
+  //       subdomain: "demo",
+  //     },
+  //   },
+  // });
 
-  const allPaths = allPosts
-    .flatMap(({ site, slug }) => [
-      site?.subdomain && {
-        domain: `${site.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`,
+  const allPaths = []
+    .flatMap(
+      ({
+        site,
         slug,
-      },
-      site?.customDomain && {
-        domain: site.customDomain,
-        slug,
-      },
-    ])
+      }: {
+        site: { subdomain: string; customDomain: string };
+        slug: string;
+      }) => [
+        site?.subdomain && {
+          domain: `${site.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`,
+          slug,
+        },
+        site?.customDomain && {
+          domain: site.customDomain,
+          slug,
+        },
+      ]
+    )
     .filter(Boolean);
 
   return allPaths;
@@ -92,7 +101,7 @@ export default async function SitePostPage({
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center">
+      {/* <div className="flex flex-col items-center justify-center">
         <div className="m-auto w-full text-center md:w-7/12">
           <p className="m-auto my-5 w-10/12 text-sm font-light text-stone-500 dark:text-stone-400 md:text-base">
             test
@@ -131,7 +140,7 @@ export default async function SitePostPage({
       )}
       {data.adjacentPosts && (
         <div className="mx-5 mb-20 grid max-w-screen-xl grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 xl:mx-auto xl:grid-cols-3"></div>
-      )}
+      )} */}
     </>
   );
 }

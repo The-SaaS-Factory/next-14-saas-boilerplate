@@ -1,30 +1,37 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPostsForSite, getSiteData } from "@/lib/fetchers";
-import Image from "next/image";
-import prisma from "@/lib/db";
+//import prisma from "@/lib/db";
 
 export async function generateStaticParams() {
-  const allSites = await prisma.site.findMany({
-    select: {
-      subdomain: true,
-      customDomain: true,
-    },
-    // feel free to remove this filter if you want to generate paths for all sites
-    where: {
-      subdomain: "demo",
-    },
-  });
+  // const allSites = await prisma.site.findMany({
+  //   select: {
+  //     subdomain: true,
+  //     customDomain: true,
+  //   },
+  //   // feel free to remove this filter if you want to generate paths for all sites
+  //   where: {
+  //     subdomain: "demo",
+  //   },
+  // });
 
-  const allPaths = allSites
-    .flatMap(({ subdomain, customDomain }) => [
-      subdomain && {
-        domain: `${subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`,
-      },
-      customDomain && {
-        domain: customDomain,
-      },
-    ])
+  const allPaths: any = [];
+  allPaths
+    .flatMap(
+      ({
+        subdomain,
+        customDomain,
+      }: {
+        subdomain: string;
+        customDomain: string;
+      }) => [
+        subdomain && {
+          domain: `${subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`,
+        },
+        customDomain && {
+          domain: customDomain,
+        },
+      ]
+    )
     .filter(Boolean);
 
   return allPaths;
@@ -45,10 +52,13 @@ export default async function SiteHomePage({
     notFound();
   }
 
+  console.log(posts);
+  
+
   return (
     <>
       <div className="mb-20 w-full">
-        {posts.length > 0 ? (
+        {/* {posts.length > 0 ? (
           <div className="mx-auto w-full max-w-screen-xl md:mb-28 lg:w-5/6">
             <Link href={`/${posts[0].slug}`}>
               <div className="group relative mx-auto h-80 w-full overflow-hidden sm:h-150 lg:rounded-xl"></div>
@@ -102,7 +112,8 @@ export default async function SiteHomePage({
             posts
           </div>
         </div>
-      )}
+      )} */}
+      </div>
     </>
   );
 }
