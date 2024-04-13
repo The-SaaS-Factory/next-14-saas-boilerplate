@@ -17,24 +17,31 @@ export default authMiddleware({
     let hostname = req.headers
       .get("host")!
       .replace(".localhost:3000", `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`);
+    const { userId, sessionClaims } = auth;
 
-    // Handle users who aren't authenticated
-    if (!auth.userId && !auth.isPublicRoute) {
-      return redirectToSignIn({ returnBackUrl: req.url });
-    }
-    // Redirect logged in users to organization selection page if they are not active in an organization
-    // if (
-    //   auth.userId &&
-    //   !auth.orgId &&
-    //   req.nextUrl.pathname !== "/org-selection"
-    // ) {
-    //   const orgSelection = new URL("/org-selection", req.url);
-    //   return NextResponse.redirect(orgSelection);
-    // }
-    // If the user is logged in and trying to access a protected route, allow them to access route
-    if (auth.userId && !auth.isPublicRoute) {
+    // For user visiting /onboarding, don't try and redirect
+    if (userId && req.nextUrl.pathname === "/onboarding") {
       return NextResponse.next();
     }
+
+    // User isn't signed in and the route is private -- redirect to sign-in
+    if (!userId && !auth.isPublicRoute)
+      return redirectToSignIn({ returnBackUrl: req.url });
+
+    // Catch users who doesn't have `onboardingComplete: true` in PublicMetata
+    // Redirect them to the /onboading out to complete onboarding
+    console.log(sessionClaims?.metadata);
+    
+    if (userId && !sessionClaims?.metadata?.onboardingComplete) {
+      const onboardingUrl = new URL("/onboarding", req.url);
+      return NextResponse.redirect(onboardingUrl);
+    }
+
+    // User is logged in and the route is protected - let them view.
+    if (userId && !auth.isPublicRoute) return NextResponse.next();
+
+    // If the route is public, anyone can view it.
+    if (auth.isPublicRoute) return NextResponse.next();
 
     const searchParams = req.nextUrl.searchParams.toString();
     // Get the pathname of the request (e.g. /, /about, /blog/first-post)
@@ -49,11 +56,7 @@ export default authMiddleware({
     ) {
       return NextResponse.next();
     }
-    // console.log("here");
 
-
-    console.log("here-"+ hostname +''+ path);
-    
     // rewrite everything else to `/[domain]/[slug] dynamic route
     return NextResponse.rewrite(new URL(`/${hostname}${path}`, req.url));
     // Allow users visiting public routes to access them

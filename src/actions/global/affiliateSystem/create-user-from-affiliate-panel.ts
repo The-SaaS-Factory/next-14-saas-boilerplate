@@ -14,8 +14,6 @@ export const createUserFromAffiliatePanel = async (
   const userClerk = auth();
   if (!userClerk) throw new Error("client clerk not found");
   const { userId } = await getUser(userClerk);
-
-
   
   const payloadNew = {
     first_name: payload.first_name,
