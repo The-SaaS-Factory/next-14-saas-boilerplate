@@ -1,7 +1,7 @@
 export const constants = {
   appUrl: "https://hostingclan.com",
   appName: "Boilerplate",
-  logoUrl: "https://demo.thesaasfactory.dev/assets/img/logo.png",
+  logoUrl: "/assets/img/logo-next-14",
   appResume: "The best boilerplate in Next 14.",
   demoMode: true,
 };
