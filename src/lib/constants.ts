@@ -1,8 +1,9 @@
 export const constants = {
   appUrl: "https://hostingclan.com",
   appName: "Boilerplate",
-  logoUrl: "/assets/img/logowhite.png",
-  appResume: "The best boilerplate in next 14.",
+  logoUrl: "https://demo.thesaasfactory.dev/assets/img/logo.png",
+  appResume: "The best boilerplate in Next 14.",
+  demoMode: true,
 };
 
 export const sliderSettings = {

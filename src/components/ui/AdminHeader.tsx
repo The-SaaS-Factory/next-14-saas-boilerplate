@@ -2,13 +2,19 @@
 import { useSidebarState } from "@/states/ui/sidebarState";
 import useDarkTheme from "@/app/hooks/useDarkTheme";
 import useSuperAdmin from "@/app/hooks/useSuperAdmin";
-import { OrganizationSwitcher, UserButton, useOrganization } from "@clerk/nextjs";
+import {
+  OrganizationSwitcher,
+  UserButton,
+  useOrganization,
+} from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import Bars3Icon from "@heroicons/react/24/outline/Bars3Icon";
 import Link from "next/link";
 import { BellIcon } from "@heroicons/react/24/outline";
 import useMembership from "@/app/hooks/useMembership";
 import UpgradeteButton from "../core/UpgradeteButton";
+import { constants } from "@/lib/constants";
+import { makeUserAsAdmin } from "@/actions/global/demoModule/make-user-as-admin";
 
 const AdminHeader = ({
   notificationsCount,
@@ -24,6 +30,10 @@ const AdminHeader = ({
   const { daktThemeSelector, isDarkTheme } = useDarkTheme();
   const { membershipPlanName } = useMembership();
 
+  const handleAccessAsSuperAdminInDemoMode = async () => {
+    if (constants.demoMode) await makeUserAsAdmin();
+  };
+  
   return (
     <div>
       {" "}
@@ -63,10 +73,23 @@ const AdminHeader = ({
               )}
             </div>
             <div className="flex items-center gap-x-4 lg:gap-x-6">
-              {isSuperAdmin && (
+              {isSuperAdmin ? (
                 <Link href="/admin" className="btn-main">
                   <span>Admin Panel</span>
                 </Link>
+              ) : (
+                <div>
+                  {constants.demoMode && (
+                    <button
+                      onClick={() => {
+                        handleAccessAsSuperAdminInDemoMode();
+                      }}
+                      className="btn-main"
+                    >
+                      <span>Access as Super Admin</span>
+                    </button>
+                  )}
+                </div>
               )}
 
               {daktThemeSelector}
