@@ -14,6 +14,16 @@ Our vision is that a programmer with a regular job can, with this boilerplate, l
 
 ## Demo
 [https://next14.thesaasfactory.dev/](https://next14.thesaasfactory.dev/)
+
+**Super Admin Access**
+  - Login as Normal User
+  - Make click on the "Access as Super Admin" button in the Header
+
+**Stripe test card number**
+  - 4242 4242 4242 4242
+  - 12/28
+  - 123
+
 <!-- ## Demo
 [https://demo.thesaasfactory.dev/](https://demo.thesaasfactory.dev/)
 
