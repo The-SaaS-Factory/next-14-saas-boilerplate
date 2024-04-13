@@ -14,6 +14,7 @@ type FormInfo = {
   name: string;
   description: string;
 };
+const isDemoMode = constants.demoMode;
 
 export type Field = {
   name: string;
@@ -794,9 +795,15 @@ const NewForm = ({
         </div>
         {!autoSave && (
           <div className="mt-6 max-w-5xl flex items-center justify-end gap-x-6 pr-7">
-            <button type="submit" className="btn-main">
-              {customSaveButtonText ? customSaveButtonText : "Save"}
-            </button>
+            {isDemoMode ? (
+              <button type="submit" className="btn-main" disabled>
+                Demo Mode Enabled
+              </button>
+            ) : (
+              <button type="submit" className="btn-main">
+                {customSaveButtonText ? customSaveButtonText : "Save"}
+              </button>
+            )}
           </div>
         )}
         <hr className="my-4" />
@@ -982,6 +989,7 @@ import {
   parseSettingDataOnSubmit,
 } from "@/utils/facades/frontendFacades/formFacade";
 import TableLoaderSkeleton from "../ui/loaders/TableLoaderSkeleton";
+import { constants } from "buffer";
 
 export function MapSelector({
   openModal,
