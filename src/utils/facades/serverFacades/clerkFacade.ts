@@ -66,7 +66,7 @@ export const handleUpdateDataForUser = async ({
   userBdId,
   data,
 }: {
-  scope: string;
+  scope: "publicMetadata" | "privateMetadata" | "unsafeMetadata";
   userBdId: number;
   data: any;
 }) => {
