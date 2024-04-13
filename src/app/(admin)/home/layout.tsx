@@ -1,8 +1,7 @@
 import { ReactNode } from "react";
-import { Protect, SignIn, SignedIn, SignedOut } from "@clerk/nextjs";
+import { SignIn, SignedIn, SignedOut } from "@clerk/nextjs";
 import AdminLayout from "@/components/layouts/AdminLayout";
 import { RedirectSuperAadminInLogin } from "@/utils/facades/frontendFacades/superAdminFrontendFacade";
-import ClientLayout from "@/components/layouts/ClientLayout";
 
 const AdminRoot = ({ children }: { children: ReactNode }) => {
   return (
@@ -14,12 +13,7 @@ const AdminRoot = ({ children }: { children: ReactNode }) => {
       </SignedOut>
       <SignedIn>
         <div>
-          <Protect role="org:admin">
-            <AdminLayout>{children}</AdminLayout>
-          </Protect>
-          <Protect role="org:member">
-            <ClientLayout>{children}</ClientLayout>
-          </Protect>
+          <AdminLayout>{children}</AdminLayout>
         </div>
         <RedirectSuperAadminInLogin url="/admin" />
       </SignedIn>

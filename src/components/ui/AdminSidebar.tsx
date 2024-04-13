@@ -13,7 +13,7 @@ import { useSidebarState } from "@/states/ui/sidebarState";
 import Navigation from "../core/Navigation";
 import { adminNavigation } from "../layouts/AdminLayout";
 import Link from "next/link";
-import { OrganizationSwitcher, useOrganization } from "@clerk/nextjs";
+import { OrganizationSwitcher   } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import useDarkTheme from "@/app/hooks/useDarkTheme";
 
@@ -26,7 +26,6 @@ const AdminSidebar = () => {
     })
   );
 
-  const { organization } = useOrganization();
 
   return (
     <div>
@@ -109,11 +108,9 @@ const AdminSidebar = () => {
                   <nav className="flex flex-1 flex-col">
                     <ul role="list" className="flex flex-1 flex-col gap-y-7">
                       <li>
-                        {organization && (
                           <ul role="list" className=" space-y-1">
                             <Navigation navigation={adminNavigation} />
                           </ul>
-                        )}
                       </li>
                       <li className="mt-auto -mx-2">
                         <Link
@@ -179,11 +176,9 @@ const AdminSidebar = () => {
           <nav className="flex flex-1 flex-col">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
               <li>
-                {organization && (
                   <ul role="list" className=" space-y-1">
                     <Navigation navigation={adminNavigation} />
                   </ul>
-                )}
               </li>
 
               <li className="mt-auto">
