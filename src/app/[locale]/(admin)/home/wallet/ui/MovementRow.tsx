@@ -1,12 +1,12 @@
 "use client";
 import { AdminMovementsAmounts } from "@prisma/client";
-import { formatTimestampToDateString } from "../../../../../utils/facades/serverFacades/strFacade";
 import {
   ArrowDownCircleIcon,
   ArrowUpCircleIcon,
 } from "@heroicons/react/24/outline";
 import { parsePriceInLocalCurrency } from "@/utils/facades/frontendFacades/parseValuesFacade";
 import { getBadgeClass } from "@/utils/facades/frontendFacades/visualFacade";
+import { formatTimestampToDateString } from "@/utils/facades/serverFacades/strFacade";
 
 export const MovementRow = (
   movement: AdminMovementsAmounts,

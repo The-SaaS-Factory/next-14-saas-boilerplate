@@ -1,7 +1,6 @@
 import React from "react";
 import { ISupportTicket } from "@/interfaces/supportModule";
 import { Card, Flex } from "@tremor/react";
-import { showTicketStatus } from "@/app/(admin)/home/support/ui/SupportTicketsList";
 import {
   formatTimestampToDateString,
   isValidJSON,
@@ -11,6 +10,7 @@ import AddMessageToSupportTicket from "./AddMessageToSupportTicket";
 import CloseTicket from "./CloseTicket";
 import Image from "next/image";
 import Link from "next/link";
+import { showTicketStatus } from "@/app/[locale]/(admin)/home/support/ui/SupportTicketsList";
 
 const ViewSupportTicketDetailsPage = ({
   ticket,

@@ -70,8 +70,8 @@ const NewForm = ({
   customSaveButtonText,
 }: FormProps) => {
   //States
-  const languages = ["en", "es"];
-  const [langSelected, setLangSelected] = useState(languages[0]);
+   
+  const [langSelected, setLangSelected] = useState(locales[0]);
 
   const [loading, setLoading] = useState(false);
   const {
@@ -209,7 +209,7 @@ const NewForm = ({
                 typeof values[fieldName] === "string"
                   ? JSON.parse(values[fieldName])
                   : values[fieldName];
-              languages.map((lang: string) => {
+                  locales.map((lang: string) => {
                 setValue(field.name + "_" + lang, newValues[lang]);
               });
             } else {
@@ -283,12 +283,12 @@ const NewForm = ({
                         <TabGroup>
                           <TabList
                             variant="line"
-                            defaultValue={languages[0]}
+                            defaultValue={locales[0]}
                             className={`mt-4 divide-x-2 divide-gray-300 
                             space-x-3 uppercase p-3
                             `}
                           >
-                            {languages.map((langT) => (
+                            {locales.map((langT) => (
                               <Tab
                                 onClick={() => setLangSelected(langT)}
                                 className={`px-3
@@ -305,7 +305,7 @@ const NewForm = ({
                             ))}
                           </TabList>
                           <TabPanels>
-                            {languages.map((lang) => (
+                            {locales.map((lang) => (
                               <TabPanel key={"1-" + lang}>
                                 <TextInput
                                   id={field.name + lang}
@@ -426,8 +426,6 @@ const NewForm = ({
                       <Switch
                         checked={watch(field.name) === "true" ? true : false}
                         onChange={(isChecked) => {
-                          console.log(isChecked.toString());
-
                           setValue(field.name, isChecked.toString());
                         }}
                         className={classNames(
@@ -1048,6 +1046,7 @@ import {
   parseSettingDataOnSubmit,
 } from "@/utils/facades/frontendFacades/formFacade";
 import TableLoaderSkeleton from "../ui/loaders/TableLoaderSkeleton";
+import { locales } from "@/i18n";
 
 export function MapSelector({
   openModal,

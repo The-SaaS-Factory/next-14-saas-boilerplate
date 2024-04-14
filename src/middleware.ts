@@ -39,8 +39,6 @@ export default authMiddleware({
 
     // Catch users who doesn't have `onboardingComplete: true` in PublicMetata
     // Redirect them to the /onboading out to complete onboarding
-    console.log(sessionClaims?.metadata);
-
     if (userId && !sessionClaims?.metadata?.onboardingComplete) {
       const onboardingUrl = new URL("/onboarding", req.url);
       return NextResponse.redirect(onboardingUrl);

@@ -48,7 +48,6 @@ export const connectCouponWithStripe = async ({
         }
       );
 
-      console.log(stripeCoupon);
 
       if (stripeCoupon) {
         const couponSetting = await prisma.couponSettings.findFirst({
