@@ -31,9 +31,10 @@ export default authMiddleware({
       .replace(".localhost:3000", `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`);
     const { userId, sessionClaims } = auth;
 
+    console.log( req.nextUrl.pathname);
     
     // For user visiting /onboarding, don't try and redirect
-    if (userId && req.nextUrl.pathname === "/onboarding" && !auth.isPublicRoute) {
+    if (userId && req.nextUrl.pathname.includes("onboarding") && !auth.isPublicRoute) {
       return NextResponse.next();
     }
 
