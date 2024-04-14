@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Switch } from "@headlessui/react";
+import { Switch, Tab } from "@headlessui/react";
 import { toast } from "sonner";
 import {
   ArchiveBoxArrowDownIcon,
@@ -27,6 +27,7 @@ export type Field = {
   forceInteger?: boolean;
   required: boolean;
   options?: FieldSelectOption[];
+  hasLanguageSupport?: boolean;
 };
 
 type FieldSelectOption = {
@@ -69,6 +70,9 @@ const NewForm = ({
   customSaveButtonText,
 }: FormProps) => {
   //States
+  const languages = ["en", "es"];
+  const [langSelected, setLangSelected] = useState(languages[0]);
+
   const [loading, setLoading] = useState(false);
   const {
     handleSubmit,
@@ -166,6 +170,7 @@ const NewForm = ({
   };
 
   useEffect(() => {
+    //For settings forms
     if (Array.isArray(values)) {
       values.forEach((value: any) => {
         const field = fields.find((f: any) => f.name === value.settingName);
@@ -199,7 +204,17 @@ const NewForm = ({
               }
             }
           } else {
-            setValue(fieldName, values[fieldName]);
+            if (field.hasLanguageSupport) {
+              const newValues =
+                typeof values[fieldName] === "string"
+                  ? JSON.parse(values[fieldName])
+                  : values[fieldName];
+              languages.map((lang: string) => {
+                setValue(field.name + "_" + lang, newValues[lang]);
+              });
+            } else {
+              setValue(fieldName, values[fieldName]);
+            }
 
             // fields.forEach((field: any) => {
             //   if (field.type === "select") {
@@ -265,13 +280,52 @@ const NewForm = ({
                   {field.type === "text" && (
                     <div className="mt-2  ">
                       <div className="flex flex-col rounded-md shadow-sm ">
+                        <TabGroup>
+                          <TabList
+                            variant="line"
+                            defaultValue={languages[0]}
+                            className={`mt-4 divide-x-2 divide-gray-300 
+                            space-x-3 uppercase p-3
+                            `}
+                          >
+                            {languages.map((langT) => (
+                              <Tab
+                                onClick={() => setLangSelected(langT)}
+                                className={`px-3
+                              ${
+                                langSelected === langT
+                                  ? "bg-sky-100 rounded-md"
+                                  : ""
+                              }
+                              `}
+                                key={langT}
+                              >
+                                {langT}
+                              </Tab>
+                            ))}
+                          </TabList>
+                          <TabPanels>
+                            {languages.map((lang) => (
+                              <TabPanel key={"1-" + lang}>
+                                <TextInput
+                                  id={field.name + lang}
+                                  {...register(field.name + "_" + lang, {
+                                    required: field.required,
+                                  })}
+                                  error={errors[`${field.name}`] && true}
+                                />
+                              </TabPanel>
+                            ))}
+                          </TabPanels>
+                        </TabGroup>
+                        {/* 
                         <TextInput
                           id={field.name}
                           {...register(field.name, {
                             required: field.required,
                           })}
                           error={errors[`${field.name}`] && true}
-                        />
+                        /> */}
                       </div>
                       {field.note && (
                         <div className="italic ">
@@ -979,6 +1033,10 @@ import {
   NumberInput,
   SearchSelect,
   SearchSelectItem,
+  TabGroup,
+  TabList,
+  TabPanel,
+  TabPanels,
   TextInput,
   Textarea,
 } from "@tremor/react";

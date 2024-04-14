@@ -7,9 +7,12 @@ import { PencilIcon } from "@heroicons/react/24/outline";
 import DeleteModel from "@/components/core/DeleteModel";
 import { deletePlan } from "@/actions/superAdmin/superAdminBillingModule/delete-plan";
 import { getPriceRange } from "@/utils/facades/modulesFacades/billingFacade";
+import { traslateData } from "@/utils/facades/frontendFacades/parseValuesFacade";
+import { useLocale } from "next-intl";
 
 const BillingPlansList = async () => {
   const { data } = await getAllPlans();
+  const locale = useLocale();
 
   return (
     <div>
@@ -69,7 +72,9 @@ const BillingPlansList = async () => {
                       {data?.map((plan: any) => (
                         <tr key={plan.id}>
                           <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
-                            <div className=" ">{plan.name}</div>
+                            <div className=" ">
+                              {traslateData(plan.name, locale)}
+                            </div>
                           </td>
 
                           <td className="whitespace-nowrap px-3 py-5 text-sm  ">
@@ -80,9 +85,7 @@ const BillingPlansList = async () => {
                               ? getPriceRange(plan.pricing, "usd")
                               : "No prices yet"}
                           </td>
-                          <td className="whitespace-nowrap px-3 py-5 text-sm  ">
-                            
-                          </td>
+                          <td className="whitespace-nowrap px-3 py-5 text-sm  "></td>
                           <td className="whitespace-nowrap px-3 py-5 text-sm  ">
                             {plan.PlanCapabilities?.length}
                           </td>

@@ -1,4 +1,4 @@
-import NewForm from "@/components/core/NewForm";
+import NewForm, { Field } from "@/components/core/NewForm";
 import { upsertPlan } from "@/actions/superAdmin/superAdminBillingModule/upsert-plan";
 
 const UpsertPlan = ({ planId, values }: { planId?: number; values?: any }) => {
@@ -7,11 +7,12 @@ const UpsertPlan = ({ planId, values }: { planId?: number; values?: any }) => {
     description: "Create a new plan for your organization",
   };
 
-  const fields = [
+  const fields: Field[] = [
     {
       name: "name",
       label: "Name",
       type: "text",
+      hasLanguageSupport: true,
       required: true,
     },
     {

@@ -15,7 +15,7 @@ export default async function RootLayout({
   params: {locale: string};
 }) {
   return (
-    <html lang={locale}>
+    <html lang={locale} className="antialiased">
       <ClerkProvider afterSignUpUrl="/home" afterSignInUrl="/home">
         <body className={inter.className}>{children}</body>
         <Toaster richColors={true} position="top-center" />

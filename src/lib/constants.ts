@@ -3,7 +3,7 @@ export const constants = {
   appName: "Boilerplate",
   logoUrl: "/assets/img/logo-next-14-white.png",
   appResume: "The best boilerplate in Next 14.",
-  demoMode: true,
+  demoMode: false,
 };
 
 export const sliderSettings = {

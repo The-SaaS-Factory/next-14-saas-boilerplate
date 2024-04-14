@@ -63,13 +63,32 @@ export const parseSettingDataOnSubmit = async (data: any, fields: any) => {
   }
 };
 
-export const parseDataOnSubmit = async (data: any, fields: any) => {
+export const parseDataOnSubmit = async (data: any, fields: Field[]) => {
   const payload: any = {};
-  const promises = fields.map(async (field: any) => {
-    const fieldName = field.name;
-    let fieldValue = data[fieldName];
 
-    payload[fieldName] = fieldValue;
+  const processedData: any = {};
+
+  for (const key in data) {
+    if (key.includes("_")) {
+      const lang = key.split("_")[1];
+      if (!processedData.name) {
+        processedData.name = {};
+      }
+      processedData.name[lang] = data[key];
+    } else {
+      processedData[key] = data[key];
+    }
+  }
+
+
+
+  //If have, join all fields with _ in some first part before the _ in unique field with the same name before the _
+
+  const promises = fields.flat().map(async (field: Field) => {
+    const fieldName = field.name;
+    let fieldValue = processedData[fieldName];
+
+    payload[fieldName] = field.hasLanguageSupport ? JSON.stringify(fieldValue) : fieldValue;
 
     if (fieldValue !== undefined) {
       if (field.type === "number") {

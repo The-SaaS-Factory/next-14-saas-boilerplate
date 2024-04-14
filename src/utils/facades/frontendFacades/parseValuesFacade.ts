@@ -1,9 +1,8 @@
+
 export const parsePriceInLocalCurrency = (
   price: number,
   currencyCode: string
 ) => {
-  console.log(currencyCode);
-  
   let USDollar = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
@@ -38,7 +37,6 @@ export const parsePriceInLocalCurrency = (
   }
 };
 
-
 export const parseNameFrequency = (frequency: string) => {
   switch (frequency) {
     case "MONTHLY":
@@ -51,5 +49,18 @@ export const parseNameFrequency = (frequency: string) => {
       return "Anualmente";
     default:
       return frequency;
+  }
+};
+
+export const traslateData = (string: string | object, locale: string) => {
+  let traduction: string | object = string;
+
+  if (typeof string === "string") {
+    try {
+      traduction = JSON.parse(string);
+      return (traduction as Record<string, string>)[locale];  
+    } catch (error) {
+      traduction = string;
+    }
   }
 };
