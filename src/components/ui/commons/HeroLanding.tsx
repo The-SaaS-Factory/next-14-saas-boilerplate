@@ -1,7 +1,9 @@
 import React from "react";
 import BtnBuyService from "./BtnBuyService";
+import { useTranslations } from "next-intl";
 
 const HeroLanding = () => {
+  const t = useTranslations('Index');
   return (
     <>
       <div className="  isolate pt-14">
@@ -28,7 +30,7 @@ const HeroLanding = () => {
                 text-transparent bg-gradient-to-r
                  from-pink-50 via-greeen-200 to-sky-300"
               >
-                The big great title
+                {t("title")}
               </h1>
               <p className="mt-6 py-3 text-lg leading-8 text-gray-300">
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nisi
