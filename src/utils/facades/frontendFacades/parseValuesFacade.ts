@@ -1,4 +1,3 @@
-
 export const parsePriceInLocalCurrency = (
   price: number,
   currencyCode: string
@@ -58,9 +57,9 @@ export const traslateData = (string: string | object, locale: string) => {
   if (typeof string === "string") {
     try {
       traduction = JSON.parse(string);
-      return (traduction as Record<string, string>)[locale];  
+      return (traduction as Record<string, string>)[locale];
     } catch (error) {
-      traduction = string;
+      return  string;
     }
   }
 };

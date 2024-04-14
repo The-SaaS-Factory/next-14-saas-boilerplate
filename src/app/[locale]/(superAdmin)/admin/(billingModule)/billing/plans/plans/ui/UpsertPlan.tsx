@@ -36,6 +36,7 @@ const UpsertPlan = ({ planId, values }: { planId?: number; values?: any }) => {
       label: "Description",
       type: "textarea",
       required: true,
+      hasLanguageSupport: true,
     },
   ];
 

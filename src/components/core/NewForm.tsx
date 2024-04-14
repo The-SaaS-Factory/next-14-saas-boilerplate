@@ -70,7 +70,7 @@ const NewForm = ({
   customSaveButtonText,
 }: FormProps) => {
   //States
-   
+
   const [langSelected, setLangSelected] = useState(locales[0]);
 
   const [loading, setLoading] = useState(false);
@@ -209,7 +209,11 @@ const NewForm = ({
                 typeof values[fieldName] === "string"
                   ? JSON.parse(values[fieldName])
                   : values[fieldName];
-                  locales.map((lang: string) => {
+
+              console.log(newValues);
+              console.log(field.name);
+
+              locales.map((lang: string) => {
                 setValue(field.name + "_" + lang, newValues[lang]);
               });
             } else {
@@ -280,52 +284,56 @@ const NewForm = ({
                   {field.type === "text" && (
                     <div className="mt-2  ">
                       <div className="flex flex-col rounded-md shadow-sm ">
-                        <TabGroup>
-                          <TabList
-                            variant="line"
-                            defaultValue={locales[0]}
-                            className={`mt-4 divide-x-2 divide-gray-300 
+                        {field.hasLanguageSupport ? (
+                          <TabGroup>
+                            <TabList
+                              variant="line"
+                              defaultValue={locales[0]}
+                              className={`mt-4 divide-x-2 divide-gray-300 
                             space-x-3 uppercase p-3
                             `}
-                          >
-                            {locales.map((langT) => (
-                              <Tab
-                                onClick={() => setLangSelected(langT)}
-                                className={`px-3
+                            >
+                              {locales.map((langT) => (
+                                <Tab
+                                  onClick={() =>
+                                    setLangSelected(field.name + "_" + langT)
+                                  }
+                                  className={`px-3
                               ${
-                                langSelected === langT
+                                langSelected ===  field.name + "_" + langT
                                   ? "bg-sky-100 rounded-md"
                                   : ""
                               }
                               `}
-                                key={langT}
-                              >
-                                {langT}
-                              </Tab>
-                            ))}
-                          </TabList>
-                          <TabPanels>
-                            {locales.map((lang) => (
-                              <TabPanel key={"1-" + lang}>
-                                <TextInput
-                                  id={field.name + lang}
-                                  {...register(field.name + "_" + lang, {
-                                    required: field.required,
-                                  })}
-                                  error={errors[`${field.name}`] && true}
-                                />
-                              </TabPanel>
-                            ))}
-                          </TabPanels>
-                        </TabGroup>
-                        {/* 
-                        <TextInput
-                          id={field.name}
-                          {...register(field.name, {
-                            required: field.required,
-                          })}
-                          error={errors[`${field.name}`] && true}
-                        /> */}
+                                  key={langT}
+                                >
+                                  {langT}
+                                </Tab>
+                              ))}
+                            </TabList>
+                            <TabPanels>
+                              {locales.map((lang) => (
+                                <TabPanel key={field.name + lang}>
+                                  <TextInput
+                                    id={field.name + lang}
+                                    {...register(field.name + "_" + lang, {
+                                      required: field.required,
+                                    })}
+                                    error={errors[`${field.name}`] && true}
+                                  />
+                                </TabPanel>
+                              ))}
+                            </TabPanels>
+                          </TabGroup>
+                        ) : (
+                          <TextInput
+                            id={field.name}
+                            {...register(field.name, {
+                              required: field.required,
+                            })}
+                            error={errors[`${field.name}`] && true}
+                          />
+                        )}
                       </div>
                       {field.note && (
                         <div className="italic ">
@@ -408,15 +416,60 @@ const NewForm = ({
                   {field.type === "textarea" && (
                     <div className="mt-2  ">
                       <div>
-                        <Textarea
-                          {...register(field.name, {
-                            required: field.required,
-                          })}
-                          className="min-h-32"
-                          value={watch(field.name)}
-                          error={errors[`${field.name}`] && true}
-                          id={field.name}
-                        />
+                        {field.hasLanguageSupport}
+                        {field.hasLanguageSupport ? (
+                          <TabGroup>
+                            <TabList
+                              variant="line"
+                              defaultValue={locales[0]}
+                              className={`mt-4 divide-x-2 divide-gray-300 
+                            space-x-3 uppercase p-3
+                            `}
+                            >
+                              {locales.map((langT) => (
+                                <Tab
+                                  onClick={() =>
+                                    setLangSelected(field.name + "_" + langT)
+                                  }
+                                  className={`px-3
+                              ${
+                                langSelected === field.name + "_" + langT
+                                  ? "bg-sky-100 rounded-md"
+                                  : ""
+                              }
+                              `}
+                                  key={field.name + langT}
+                                >
+                                  {langT}
+                                </Tab>
+                              ))}
+                            </TabList>
+                            <TabPanels>
+                              {locales.map((lang) => (
+                                <TabPanel key={field + lang}>
+                                  <Textarea
+                                    value={watch(field.name + "_" + lang)}
+                                    id={field.name + lang}
+                                    {...register(field.name + "_" + lang, {
+                                      required: field.required,
+                                    })}
+                                    className="min-h-32"
+                                    error={errors[`${field.name}`] && true}
+                                  />
+                                </TabPanel>
+                              ))}
+                            </TabPanels>
+                          </TabGroup>
+                        ) : (
+                          <Textarea
+                            {...register(field.name, {
+                              required: field.required,
+                            })}
+                            value={watch(field.name)}
+                            error={errors[`${field.name}`] && true}
+                            id={field.name}
+                          />
+                        )}
                       </div>
                     </div>
                   )}

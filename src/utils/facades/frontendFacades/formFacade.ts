@@ -70,25 +70,23 @@ export const parseDataOnSubmit = async (data: any, fields: Field[]) => {
 
   for (const key in data) {
     if (key.includes("_")) {
-      const lang = key.split("_")[1];
-      if (!processedData.name) {
-        processedData.name = {};
+      const [fieldName, lang] = key.split("_");
+      if (!processedData[fieldName]) {
+        processedData[fieldName] = {};
       }
-      processedData.name[lang] = data[key];
+      processedData[fieldName][lang] = data[key];
     } else {
       processedData[key] = data[key];
     }
   }
 
-
-
-  //If have, join all fields with _ in some first part before the _ in unique field with the same name before the _
-
   const promises = fields.flat().map(async (field: Field) => {
     const fieldName = field.name;
     let fieldValue = processedData[fieldName];
 
-    payload[fieldName] = field.hasLanguageSupport ? JSON.stringify(fieldValue) : fieldValue;
+    payload[fieldName] = field.hasLanguageSupport
+      ? JSON.stringify(fieldValue)
+      : fieldValue;
 
     if (fieldValue !== undefined) {
       if (field.type === "number") {
@@ -133,27 +131,27 @@ export const parseDataOnSubmit = async (data: any, fields: Field[]) => {
         } else {
           payload[fieldName] = JSON.stringify(fieldValue);
         }
-      } else if (field.type === "textarea") {
-        //count all images base64
-        const images = fieldValue
-          ? fieldValue.match(/data:image\/[^;]+;base64[^"]*/g)
-          : null;
-        const imagesCount = images ? images.length : 0;
-        //Save each image on server and replace base64 with url
-        for (let i = 0; i < imagesCount; i++) {
-          //image with base64 structure
-          const image = images[i];
+        // } else if (field.type === "textarea") {
+        //   //count all images base64
+        //   const images = fieldValue
+        //     ? fieldValue.match(/data:image\/[^;]+;base64[^"]*/g)
+        //     : null;
+        //   const imagesCount = images ? images.length : 0;
+        //   //Save each image on server and replace base64 with url
+        //   for (let i = 0; i < imagesCount; i++) {
+        //     //image with base64 structure
+        //     const image = images[i];
 
-          const response = await saveImage(JSON.stringify(image));
+        //     const response = await saveImage(JSON.stringify(image));
 
-          if (response) {
-            const responseF = await response.json();
-            fieldValue = fieldValue.replace(image, responseF.url);
-          } else {
-            fieldValue = fieldValue.replace(image, "");
-          }
-        }
-        payload[fieldName] = fieldValue;
+        //     if (response) {
+        //       const responseF = await response.json();
+        //       fieldValue = fieldValue.replace(image, responseF.url);
+        //     } else {
+        //       fieldValue = fieldValue.replace(image, "");
+        //     }
+        //   }
+        //   payload[fieldName] = fieldValue;
       } else if (field.type === "searchselect" && field.forceInteger) {
         payload[fieldName] = parseInt(fieldValue);
       } else if (field.type === "select" && field.forceInteger) {
