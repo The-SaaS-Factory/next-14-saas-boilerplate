@@ -5,6 +5,7 @@ import TableLoaderSkeleton from "@/components/ui/loaders/TableLoaderSkeleton";
 import { getInvoiceDetails } from "@/actions/superAdmin/superAdminBillingModule/get-invoice-details";
 import ViewInvoiceDetails from "../ui/ViewInvoiceDetails";
 import { IInvoice } from "@/interfaces/billingModule";
+import { getTranslations } from "next-intl/server";
 
 export const metadata: Metadata = {
   title: "View Invoice Details",
@@ -18,14 +19,15 @@ const AdminViewInvoiceDetails = async ({
   const invoiceStr = params.id || "";
   const invoiceId = parseInt(invoiceStr);
   const invoice = await getInvoiceDetails(invoiceId);
+  const t = await getTranslations("AdminLayout");
 
   return (
     <div>
       <Suspense fallback={<TableLoaderSkeleton count={10} />}>
         <PageName
-          name={"View Invoice"}
+          name={t("pages.invoices.viewInvoiceDetails")}
           breadcrumbs={[
-            { name: "Dashboard", href: "/home" },
+            { name: t("dashboard"), href: "/home" },
             {
               name: "Invoices",
               href: "/home/invoices",

@@ -9,8 +9,6 @@ export default async function completeOnboarding(payload: any) {
   if (!userClerk) throw new Error("client clerk not found");
   const { userId } = await getUser(userClerk);
 
-  console.log("payload form form in onboarding page", payload);
-  console.log("userId", userId);
 
   //Store now in your model the onboarding data and then, update the user metadata in clerk
   return await handleUpdateDataForUser({
@@ -25,6 +23,8 @@ export default async function completeOnboarding(payload: any) {
       return "ok";
     })
     .catch((error) => {
+      console.log("Error updating user metadata", error);
+      
       console.error("Error updating user metadata", error);
       return "error";
     });

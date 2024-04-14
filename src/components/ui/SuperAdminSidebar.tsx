@@ -11,10 +11,11 @@ import {
 import { useSidebarState } from "@/states/ui/sidebarState";
 import Navigation from "../core/Navigation";
 import Link from "next/link";
-import { superAdminNavigation } from "../layouts/SuperAdminLayout";
 import { OrganizationSwitcher } from "@clerk/nextjs";
 import useDarkTheme from "@/app/hooks/useDarkTheme";
 import { dark } from "@clerk/themes";
+import { useNavigation } from "../layouts/useNavigation";
+import { useTranslations } from "next-intl";
 
 const SuperAdminSidebar = () => {
   const { toggleSidebarMenu, isSidebarMenuOpen } = useSidebarState(
@@ -25,6 +26,8 @@ const SuperAdminSidebar = () => {
   );
 
   const { isDarkTheme } = useDarkTheme();
+  const { superAdminNavigation } = useNavigation();
+  const t = useTranslations("SuperAdminLayout.navigation");
 
   return (
     <div>
@@ -122,7 +125,7 @@ const SuperAdminSidebar = () => {
                             className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600"
                             aria-hidden="true"
                           />
-                          Support
+                          {t("support")}
                         </Link>
                         <Link
                           onClick={() => toggleSidebarMenu()}
@@ -133,7 +136,7 @@ const SuperAdminSidebar = () => {
                             className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600"
                             aria-hidden="true"
                           />
-                          Settings
+                          {t("settings")}
                         </Link>
                       </li>
                     </ul>
@@ -152,7 +155,7 @@ const SuperAdminSidebar = () => {
           <Link href={"/"}>
             {" "}
             <span className="text-xl font-bold text-primary">
-             Boilerplate Admin
+              Boilerplate Admin
             </span>
           </Link>
         </div>
@@ -178,7 +181,7 @@ const SuperAdminSidebar = () => {
                     className="h-6 w-6 shrink-0 text-primary "
                     aria-hidden="true"
                   />
-                  Support
+                  {t("support")}
                 </Link>
                 <Link
                   onClick={() => toggleSidebarMenu()}
@@ -189,7 +192,7 @@ const SuperAdminSidebar = () => {
                     className="h-6 w-6 shrink-0 text-primary "
                     aria-hidden="true"
                   />
-                  Settings
+                  {t("settings")}
                 </Link>
               </li>
             </ul>

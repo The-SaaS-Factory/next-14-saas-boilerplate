@@ -5,5 +5,11 @@
   "LocaleSwitcher": {
     "label": "Cambiar lenguaje",
     "locale": "{locale, select, de {🇩🇪 Deutsch} en {🇺🇸 English} es {es Español} other {Unknown}}"
+  },
+  "AdminLayout": {
+    "navigation": {
+      "general": "General",
+      "dashboard": "Escritorio"
+    }
   }
 }

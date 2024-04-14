@@ -3,17 +3,27 @@ import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import completeOnboarding from "@/actions/global/onboarding/complete-onboarding";
 import { toast } from "sonner";
+import ReactConfetti from "react-confetti";
 
 export default function Example() {
+  const [isCompleted, setIsCompleted] = useState(false);
   const [open, setOpen] = useState(true);
   const handleCompleteOnboarding = async () => {
-    await completeOnboarding("some data").then((res) => {
-      if (res === "ok") {
-        toast.success("Onboarding completed");
-        setOpen(false);
-        window.location.replace("/home");
-      }
-    });
+    await completeOnboarding("some data")
+      .then((r) => {
+        console.log(r);
+        if (r === "ok") {
+          setIsCompleted(true);
+          toast.success("Onboarding completed");
+          setTimeout(() => {
+            window.location.href = "/home";
+          }, 5000);
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+        toast.error("Error completing onboarding");
+      });
   };
 
   return (
@@ -47,12 +57,17 @@ export default function Example() {
                   <h1 className="text-title">Welcome to the admin panel</h1>
                   <p className="mt-32">Put your form here</p>
                 </div>
-                <button
-                  onClick={handleCompleteOnboarding}
-                  className="btn-main w-[50%] mx-auto"
-                >
-                  Complete onboarding
-                </button>
+                {isCompleted && <ReactConfetti width={1000} height={1000} />}
+                {!isCompleted ? (
+                  <button
+                    onClick={handleCompleteOnboarding}
+                    className="btn-main w-[50%] mx-auto"
+                  >
+                    Complete onboarding
+                  </button>
+                ) : (
+                  <p className="animate-pulse">Redirecting ...</p>
+                )}
               </div>
             </Dialog.Panel>
           </Transition.Child>

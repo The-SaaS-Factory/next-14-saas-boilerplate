@@ -1,9 +1,76 @@
 {
-    "Index": {
-      "title": "Hello world!"
+  "Index": {
+    "title": "Hello world!"
+  },
+  "LocaleSwitcher": {
+    "label": "Change language",
+    "locale": "{locale, select, de {🇩🇪 Deutsch} en {🇺🇸 English} es {es Español} other {Unknown}}"
+  },
+  "AdminLayout": {
+    "navigation": {
+      "general": "General",
+      "dashboard": "Dashboard",
+      "examples": "Examples",
+      "exampleTitle": "Example Page Title",
+      "btnExample": "Button Example",
+      "exampleOne": "Example One",
+      "billing": "Billing",
+      "invoices": "Invoices",
+      "wallet": "Wallet",
+      "affiliatePanel": "Affiliate Panel",
+      "settings": "Settings",
+      "support": "Support"
     },
-    "LocaleSwitcher": {
-      "label": "Change language",
-      "locale": "{locale, select, de {🇩🇪 Deutsch} en {🇺🇸 English} es {es Español} other {Unknown}}"
+    "pages": {
+      "dashboard": {
+        "title": "Dashboard",
+        "subtitle": "Welcome to your dashboard",
+        "actionOne": "Make your first order",
+        "actionOneDescription": "Go to the billing section and make your first order",
+        "actionTwo": "Manage your wallet",
+        "actionTwoDescription": "Check your wallet balance",
+        "exampleActive": "Examples Actives",
+        "invoicesInPaid": "Invoices pendings",
+        "tickersActives": "Tickers Actives"
+      },
+      "wallet": {
+        "yourWallet": "My Wallet",
+        "seeMovements": "See Movements",
+        "movementIn": "Movements in",
+        "notMovemenetsFound": "No movements found in this currency"
+      },
+      "invoices": {
+        "invoices": "Invoices",
+        "total": "Total",
+        "status": "Status",
+        "methodPayment": "Payment Method",
+        "date": "Date",
+        "view": "View",
+        "showing": "Showing",
+        "results": "Results",
+        "of": "of",
+        "to": "to",
+        "notInvoiceFound":  "No invoices found",
+        "viewInvoiceDetails": "View Invoice details"
+      }
+    }
+  },
+  "SuperAdminLayout": {
+    "navigation": {
+      "general": "General",
+      "dashboard": "Dashboard",
+      "examples": "Examples",
+      "exampleTitle": "Example Page Title",
+      "btnExample": "Button Example",
+      "exampleOne": "Example One",
+      "billing": "Billing",
+      "invoices": "Invoices",
+      "users": "Users",
+      "plans": "Plans",
+      "suscriptions": "Suscriptions",
+      "coupons": "Coupons",
+      "support": "Support",
+      "settings": "Settings"
     }
   }
+}
