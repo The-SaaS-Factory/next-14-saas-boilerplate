@@ -34,7 +34,7 @@ export const HeaderLanding = () => {
               width={200}
               height={160}
               src={constants.logoUrl}
-              alt="CluzStudio"
+              alt="The SaaS Boilerplate"
             />
           </Link>
         </div>

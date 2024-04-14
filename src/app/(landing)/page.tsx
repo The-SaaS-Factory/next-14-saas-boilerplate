@@ -2,7 +2,6 @@ import HeroLanding from "@/components/ui/commons/HeroLanding";
 import AffiliateHandler from "@/components/core/AffiliateHandler";
 import CTAOffer from "@/components/ui/commons/CTAOffer";
 import TestimonialMultiple from "./ui/TestimonialMultiple";
-import TestimonialMultipleMobile from "./ui/TestimonialMultipleMobile";
 
 export default function LandingPage({
   searchParams,
@@ -17,9 +16,6 @@ export default function LandingPage({
       <div className="bg-white flex">
         <div className="hidden lg:flex   mx-auto">
           <TestimonialMultiple />
-        </div>
-        <div className="lg:hidden flex  mx-auto">
-          <TestimonialMultipleMobile />
         </div>
       </div> 
       <div>
