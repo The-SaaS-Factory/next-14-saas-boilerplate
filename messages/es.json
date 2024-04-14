@@ -1,15 +1,137 @@
 {
   "Index": {
-    "title": "Hola mundo!"
+    "title": "¡Hola mundo!"
   },
   "LocaleSwitcher": {
-    "label": "Cambiar lenguaje",
-    "locale": "{locale, select, de {🇩🇪 Deutsch} en {🇺🇸 English} es {es Español} other {Unknown}}"
+    "label": "Cambiar idioma",
+    "locale": "{locale, select, de {🇩🇪 Alemán} en {🇺🇸 Inglés} es {es Español} other {Desconocido}}"
   },
   "AdminLayout": {
     "navigation": {
       "general": "General",
-      "dashboard": "Escritorio"
+      "dashboard": "Tablero",
+      "examples": "Ejemplos",
+      "exampleTitle": "Título de la página de ejemplo",
+      "btnExample": "Ejemplo de botón",
+      "exampleOne": "Ejemplo uno",
+      "billing": "Facturación",
+      "invoices": "Facturas",
+      "wallet": "Billetera",
+      "affiliatePanel": "Panel de afiliados",
+      "settings": "Configuración",
+      "support": "Soporte"
+    },
+    "pages": {
+      "dashboard": {
+        "title": "Tablero",
+        "subtitle": "Bienvenido a tu tablero",
+        "actionOne": "Haz tu primer pedido",
+        "actionOneDescription": "Ve a la sección de facturación y haz tu primer pedido",
+        "actionTwo": "Administra tu billetera",
+        "actionTwoDescription": "Verifica el saldo de tu billetera",
+        "exampleActive": "Ejemplos activos",
+        "invoicesInPaid": "Facturas pendientes",
+        "tickersActives": "Tickers activos"
+      },
+      "wallet": {
+        "yourWallet": "Mi billetera",
+        "seeMovements": "Ver movimientos",
+        "movementIn": "Movimientos en",
+        "notMovemenetsFound": "No se encontraron movimientos en esta moneda"
+      },
+      "invoices": {
+        "invoices": "Facturas",
+        "total": "Total",
+        "status": "Estado",
+        "methodPayment": "Método de pago",
+        "date": "Fecha",
+        "view": "Ver",
+        "notInvoiceFound": "No se encontraron facturas",
+        "viewInvoiceDetails": "Ver detalles de la factura"
+      },
+      "plans": {
+        "monthly": "Mensual",
+        "/month": "/mes",
+        "/year": "/año",
+        "annually": "Anualmente",
+        "plans": "Planes",
+        "addPlan": "Agregar plan",
+        "pricing": "Precios",
+        "plansOfFidelity": "Planes de fidelidad en",
+        "plansOfFidelityDescription": "Descripción de planes de fidelidad",
+        "paymentFrequency": "Frecuencia de pago",
+        "buyPlan": "Comprar plan",
+        "selectPaymentMethod": "Seleccionar método de pago",
+        "payWith": "Pagar con",
+        "cancel": "Cancelar",
+        "needLogin": "Necesitas iniciar sesión para comprar un plan",
+        "login": "Iniciar sesión"
+      },
+      "settings": {
+        "settings": "Configuración",
+        "dashboard": "Tablero",
+        "profile": "Perfil",
+        "plansFidelity": "Planes de fidelidad"
+      },
+      "affiliates": {
+        "link": "Enlace de afiliado",
+        "dashboard": "Tablero",
+        "refferals": "Referidos",
+        "name": "Nombre",
+        "date": "Fecha de registro",
+        "totalAffiliates": "Total de referidos",
+        "referralLink": "Mi enlace de afiliado",
+        "affiliatePanel": "Panel de afiliados",
+        "referralLinkDescription": "Gana dinero recomendando nuestros servicios"
+      },
+      "support": {
+        "support": "Soporte",
+        "dashboard": "Tablero",
+        "images": "Imágenes",
+        "description": "Descripción",
+        "ticket": "Ticket",
+        "sendTicket": "Enviar ticket",
+        "newTicket": "Nuevo ticket",
+        "searchTicketByID": "Buscar ticket por ID",
+        "viewTicketDetails": "Ver detalles del ticket",
+        "subject": "Asunto",
+        "status": "Estado",
+        "date": "Fecha",
+        "view": "Ver",
+        "addMessage": "Agregar mensaje",
+        "showing": "Mostrando",
+        "departament": "Departamento",
+        "billing": "Facturación",
+        "notTicketFound": "No se encontraron tickets",
+        "sales": "Ventas",
+        "send": "Enviar"
+      }
+    },
+    "commons": {
+      "pagination": {
+        "showing": "Mostrando",
+        "results": "Resultados",
+        "of": "de",
+        "to": "a"
+      }
+    }
+  },
+  "SuperAdminLayout": {
+    "navigation": {
+      "general": "General",
+      "dashboard": "Tablero",
+      "examples": "Ejemplos",
+      "exampleTitle": "Título de la página de ejemplo",
+      "btnExample": "Ejemplo de botón",
+      "exampleOne": "Ejemplo uno",
+      "billing": "Facturación",
+      "invoices": "Facturas",
+      "users": "Usuarios",
+      "plans": "Planes",
+      "suscriptions": "Suscripciones",
+      "coupons": "Cupones",
+      "support": "Soporte",
+      "settings": "Configuración"
     }
   }
 }
