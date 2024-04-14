@@ -12,6 +12,7 @@ import {
   TableHeaderCell,
   TableRow,
 } from "@tremor/react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { Suspense } from "react";
 
@@ -44,6 +45,7 @@ const SupportTicketsList = async ({
   const search = query || "";
   const limit = 20;
   const offset = (currentPage - 1) * limit;
+  const t = useTranslations("AdminLayout.pages.support");
 
   const { data, totalPages, totalCount } = await getUserSupportTickets({
     args: {
@@ -64,7 +66,7 @@ const SupportTicketsList = async ({
       >
         {data.length === 0 ? (
           <div className="flex justify-center items-center h-96">
-            <NotFound message="No tickets found" />
+            <NotFound message={t("notTicketFound")} />
           </div>
         ) : (
           <div className="flex flex-col">
@@ -72,16 +74,16 @@ const SupportTicketsList = async ({
               <TableHead>
                 <TableRow className="">
                   <TableHeaderCell className="text-left">
-                    Subject
+                    {t("subject")}
                   </TableHeaderCell>
                   <TableHeaderCell className="text-center">
-                    Departament
+                    {t("departament")}
                   </TableHeaderCell>
                   <TableHeaderCell className="text-center">
-                    Status
+                    {t("status")}
                   </TableHeaderCell>
                   <TableHeaderCell className="text-center">
-                    Date
+                    {t("date")}
                   </TableHeaderCell>
                 </TableRow>
               </TableHead>
@@ -106,7 +108,7 @@ const SupportTicketsList = async ({
                         href={`/home/support/ticket/${item.id}`}
                         className="btn-main"
                       >
-                        View
+                        {t("view")}
                       </Link>
                     </TableCell>
                   </TableRow>
@@ -114,12 +116,12 @@ const SupportTicketsList = async ({
               </TableBody>
             </Table>
             <div className="flex mt-7 justify-between">
-              <div className="text-primary">
-                Mostrando <span className="font-medium">{offset + 1}</span> a{" "}
-                <span className="font-medium">{offset + data.length}</span> de{" "}
-                <span className="font-medium">{totalCount}</span> resultados
-              </div>
-              <Pagination totalPages={totalPages} />
+              <Pagination
+                totalPages={totalPages}
+                totalCount={totalCount}
+                offset={offset}
+                dataLength={data.length}
+              />
             </div>
           </div>
         )}

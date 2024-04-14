@@ -57,6 +57,7 @@ Our vision is that a programmer with a regular job can, with this boilerplate, l
 ## Integrated modules
 
  - [x] Landing Page 
+ - [x] Full Internationalization support (Frontent componenets and Dynamic Data) **This is good!**
  - [x] Responsive 
  - [x] DarkTheme
  - [x] Dashboards for Admins and Super Admin
@@ -74,9 +75,10 @@ Our vision is that a programmer with a regular job can, with this boilerplate, l
  - [x] User management
  - [x] Organization management
  - [x] Subscriptions management
- - [x] Subscriptions plans management
+ - [x] Subscriptions, plans management and user capabilities **This is good!**
  - [x] Membership plan capabilities support
  - [x] User Onboarding
+ - [x] Affiliate System with Affiliate Panel and Payments with comissions **This is good!**
  - [x] SEO friendly (SSR by Next 14)
  - [x] Vercel Analytic integration
 

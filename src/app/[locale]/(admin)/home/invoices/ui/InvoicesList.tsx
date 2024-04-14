@@ -20,6 +20,7 @@ import { getInvoiceTotal } from "@/utils/facades/serverFacades/paymentFacade";
 import { EyeIcon } from "@heroicons/react/24/outline";
 import { Suspense } from "react";
 import PageLoader from "@/components/ui/loaders/PageLoader";
+import { getTranslations } from "next-intl/server";
 
 const InvoicesList = async ({
   query,
@@ -40,6 +41,8 @@ const InvoicesList = async ({
     },
   });
 
+  const t = await getTranslations("AdminLayout.pages.invoices");
+
   return (
     <div>
       <Suspense
@@ -51,7 +54,7 @@ const InvoicesList = async ({
       >
         {data.length === 0 ? (
           <div className="flex justify-center items-center h-96">
-            <NotFound message="No invoices found" />
+            <NotFound message={t("notInvoiceFound")} />
           </div>
         ) : (
           <div className="flex flex-col text-primary">
@@ -60,19 +63,19 @@ const InvoicesList = async ({
                 <TableRow className="">
                   <TableHeaderCell className="text-left">ID</TableHeaderCell>
                   <TableHeaderCell className="text-center">
-                    Precio
+                    {t("total")}
                   </TableHeaderCell>
                   <TableHeaderCell className="text-center ">
-                    Estado
+                    {t("status")}
                   </TableHeaderCell>
                   <TableHeaderCell className="text-center">
-                    Método de pago
+                    {t("methodPayment")}
                   </TableHeaderCell>
                   <TableHeaderCell className="text-center">
                     PDF Url
                   </TableHeaderCell>
                   <TableHeaderCell className="text-center">
-                    Fecha
+                    {t("date")}
                   </TableHeaderCell>
                 </TableRow>
               </TableHead>
@@ -129,7 +132,7 @@ const InvoicesList = async ({
                         className="btn-icon  "
                       >
                         <EyeIcon className="w-5 h-5  " />
-                        <span>View</span>
+                        <span>{t("view")}</span>
                       </Link>
                     </TableCell>
                   </TableRow>
@@ -137,12 +140,20 @@ const InvoicesList = async ({
               </TableBody>
             </Table>
             <div className="flex mt-7 justify-between">
-              <div className="text-primary">
-                Mostrando <span className="font-medium">{offset + 1}</span> a{" "}
-                <span className="font-medium">{offset + data.length}</span> de{" "}
-                <span className="font-medium">{totalCount}</span> resultados
-              </div>
-              <Pagination totalPages={totalPages} />
+              <Suspense
+                fallback={
+                  <div>
+                    <PageLoader />
+                  </div>
+                }
+              >
+                <Pagination
+                  offset={offset}
+                  dataLength={data.length}
+                  totalCount={totalCount}
+                  totalPages={totalPages}
+                />
+              </Suspense>
             </div>
           </div>
         )}

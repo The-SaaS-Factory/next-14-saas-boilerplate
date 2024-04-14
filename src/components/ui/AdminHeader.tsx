@@ -33,7 +33,7 @@ const AdminHeader = ({
   const handleAccessAsSuperAdminInDemoMode = async () => {
     if (constants.demoMode) await makeUserAsAdmin();
   };
-  
+
   return (
     <div>
       {" "}
@@ -71,6 +71,7 @@ const AdminHeader = ({
                   <UpgradeteButton />
                 </div>
               )}
+             
             </div>
             <div className="flex items-center gap-x-4 lg:gap-x-6">
               {isSuperAdmin ? (

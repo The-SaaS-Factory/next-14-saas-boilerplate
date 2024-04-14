@@ -3,31 +3,32 @@ import React, { useEffect, useState } from "react";
 import Tabs from "@/components/core/Tabs";
 import { UserGroupIcon, UsersIcon } from "@heroicons/react/24/outline";
 import { useOrganization, useUser } from "@clerk/nextjs";
+import { useTranslations } from "next-intl";
 
 const SettingsTabs = () => {
   const { organization, isLoaded } = useOrganization();
   const { user } = useUser();
+  const t = useTranslations("AdminLayout.pages.settings");
 
   const [tabs, setTabs] = useState([
     {
       path: "/home/settings/profile",
-      label: "Perfil",
+      label: t("profile"),
       icon: UsersIcon,
     },
   ]);
 
   useEffect(() => {
-     
     if (organization?.id && isLoaded) {
       setTabs([
         {
           path: "/home/settings/profile",
-          label: "Perfil",
+          label: t("profile"),
           icon: UsersIcon,
         },
         {
           path: "/home/settings/billing/planActive",
-          label: "Planes de fidelidad",
+          label: t("plansFidelity"),
           icon: UserGroupIcon,
         },
       ]);
@@ -35,7 +36,7 @@ const SettingsTabs = () => {
       setTabs([
         {
           path: "/home/settings/profile",
-          label: "Perfil",
+          label: t("profile"),
           icon: UsersIcon,
         },
       ]);

@@ -5,6 +5,7 @@ import { getSupportTicketById } from "@/actions/global/supportModule/get-support
 import ViewSupportTicketDetailsPage from "@/app/modules/supportModule/ViewSupportTicketPage";
 import { getUserDB } from "@/actions/admin/userModule/get-user-DB";
 import TableLoaderSkeleton from "@/components/ui/loaders/TableLoaderSkeleton";
+import { getTranslations } from 'next-intl/server';
 
 export const metadata: Metadata = {
   title: "View Ticket",
@@ -15,18 +16,19 @@ const ViewTicket = async ({ params }: { params: { id: string } }) => {
   const ticketId = parseInt(ticketIdStr);
   const ticket = await getSupportTicketById(ticketId);
   const userDB = await getUserDB();
+  const t = await getTranslations("AdminLayout.pages.support");
   return (
     <div>
       <Suspense fallback={<TableLoaderSkeleton count={10} />}>
         <PageName
-          name={"View Ticket"}
+          name={t("viewTicketDetails")}
           breadcrumbs={[
-            { name: "Dashboard", href: "/home" },
+            { name: t("dashboard"), href: "/home" },
             {
-              name: "Support",
+              name: t("support"),
               href: "/home/support",
             },
-            { name: `Ticket ${ticket?.id}`, href: "#" },
+            { name: `${t("ticket")} ${ticket?.id}`, href: "#" },
           ]}
         />
         <ViewSupportTicketDetailsPage user={userDB} ticket={ticket} />

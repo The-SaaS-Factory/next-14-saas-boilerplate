@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import { Card, Text, TextInput, Title } from "@tremor/react";
 import { getUserDB } from "@/actions/admin/userModule/get-user-DB";
 import CopyLinkButton from "../ui/CopyLinkButton";
+import { getTranslations } from "next-intl/server";
 
 export const metadata: Metadata = {
   title: "Link",
@@ -11,17 +12,20 @@ export const metadata: Metadata = {
 
 const LinkPage = async () => {
   const user = await getUserDB();
+  const t = await getTranslations("AdminLayout.pages.affiliates");
 
   return (
     <div>
-      <PageName name={"Link"} isSubPage={true} />
+      <PageName name={t("link")} isSubPage={true} />
 
       <main className="flex-1 overflow-y-auto lg:p-6">
         <section className="mb-8">
           <Card>
             <div className="flex flex-col">
-              <Title>Tu link de afiliado</Title>
-              <Text className="text-primary">Gana el 10% de todo los servicios comprados por tus usuarios referidos</Text>
+              <Title>{t("referralLink")}</Title>
+              <Text className="text-primary">
+                {t("referralLinkDescription")}
+              </Text>
             </div>
             <div className="flex items-center mt-3 justify-between">
               <TextInput
@@ -34,32 +38,7 @@ const LinkPage = async () => {
             </div>
           </Card>
         </section>
-        <section>
-          {/* <Card>
-            <CardHeader>
-              <CardTitle>Link Performance</CardTitle>
-              <CardDescription>
-                View statistics for your referral link
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="grid gap-4 md:grid-cols-3">
-                <div className="flex flex-col">
-                  <CardDescription>Total Clicks</CardDescription>
-                  <CardTitle>1,234</CardTitle>
-                </div>
-                <div className="flex flex-col">
-                  <CardDescription>Sign Ups</CardDescription>
-                  <CardTitle>123</CardTitle>
-                </div>
-                <div className="flex flex-col">
-                  <CardDescription>Conversion Rate</CardDescription>
-                  <CardTitle>10%</CardTitle>
-                </div>
-              </div>
-            </CardContent>
-          </Card> */}
-        </section>
+        <section></section>
       </main>
     </div>
   );

@@ -1,10 +1,12 @@
 import { authMiddleware, redirectToSignIn } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import createMiddleware from "next-intl/middleware";
+import { locales } from "./i18n";
 
 const intlMiddleware = createMiddleware({
-  locales: ["en", "es"],
+  locales: locales,
   defaultLocale: "en",
+  alternateLinks: true,
 });
 
 export default authMiddleware({
@@ -16,6 +18,7 @@ export default authMiddleware({
     "/api/test",
     "/api/cron",
     "/:locale",
+    "/:locale/api/clerk",
     "/:locale/sign-in",
   ],
   beforeAuth(request) {
@@ -27,19 +30,23 @@ export default authMiddleware({
       .get("host")!
       .replace(".localhost:3000", `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`);
     const { userId, sessionClaims } = auth;
-
+    
     // For user visiting /onboarding, don't try and redirect
-    if (userId && req.nextUrl.pathname === "/onboarding") {
+    if (userId && req.nextUrl.pathname.includes("onboarding") && !auth.isPublicRoute) {
       return NextResponse.next();
     }
 
     // User isn't signed in and the route is private -- redirect to sign-in
-    if (!userId && !auth.isPublicRoute)
+    if (!userId && !auth.isPublicRoute) {
+      console.log(req.url);
       return redirectToSignIn({ returnBackUrl: req.url });
+
+    }
+      
 
     // Catch users who doesn't have `onboardingComplete: true` in PublicMetata
     // Redirect them to the /onboading out to complete onboarding
-    if (userId && !sessionClaims?.metadata?.onboardingComplete) {
+    if (userId && !sessionClaims?.metadata?.onboardingComplete && !auth.isPublicRoute) {
       const onboardingUrl = new URL("/onboarding", req.url);
       return NextResponse.redirect(onboardingUrl);
     }

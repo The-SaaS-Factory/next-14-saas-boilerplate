@@ -10,57 +10,58 @@ import { getSupportTicketsActivesCount } from "@/actions/global/supportModule/ad
 import AffiliateHandler from "@/components/core/AffiliateHandler";
 import { getUserDB } from "@/actions/admin/userModule/get-user-DB";
 import { Metadata } from "next";
- 
+import { getTranslations } from "next-intl/server";
+
 export const metadata: Metadata = {
   title: "Home",
 };
+
+
 const SuperAdminDashboardPage = async () => {
+  const t = await getTranslations("AdminLayout.pages.dashboard");
+  const invoicesCount = await getUserInvoicesPendingCount();
+  const supportTicketsCounts = await getSupportTicketsActivesCount();
+  const user = await getUserDB();
   const actions = [
     {
-      title: "Has un nuevo pedido",
+      title: t("actionOne"),
       href: "/home/services/buy-service",
       icon: ShoppingBagIcon,
       iconForeground: "text-teal-700",
-      description: "Los mejores precios y calidad en el mercado",
+      description: t("actionDescription"),
       iconBackground: "bg-teal-50",
     },
     {
-      title: "Habla con nuestro soporte",
+      title: t("actionTwo"),
       href: "/home/support",
       icon: LifebuoyIcon,
       iconForeground: "text-purple-700",
       iconBackground: "bg-purple-50",
-      description: "Estamos para ayudarte",
+      description: t("actionTwoDescription"),
     },
   ];
 
-  const invoicesCount = await getUserInvoicesPendingCount();
-  const supportTicketsCounts = await getSupportTicketsActivesCount();
-  const user = await getUserDB();
-  
-  
-
   return (
     <div>
-      <PageName name={"Escritorio  "} />
+      <PageName name={t("title")} />
       <Suspense fallback={<PageLoader />}>
         <Card className=" my-7">
           <Flex>
             <div>
               <Link href={"/home/services"}>
-                <Text color="sky">Example activos</Text>
+                <Text color="sky">{t("exampleActive")}</Text>
               </Link>
               <Metric> 3 </Metric>{" "}
             </div>
             <div>
               <Link href={"/home/invoices"}>
-                <Text color="sky">Facturas pendientes de pago</Text>
+                <Text color="sky"> {t("invoicesInPaid")}</Text>
               </Link>
               <Metric>{invoicesCount}</Metric>
             </div>
             <div>
               <Link href={"/home/support"}>
-                <Text color="sky">Tickets activos</Text>
+                <Text color="sky">{t("tickersActives")}</Text>
               </Link>
               <Metric>{supportTicketsCounts}</Metric>
             </div>
@@ -96,7 +97,6 @@ const SuperAdminDashboardPage = async () => {
               <div className="mt-8">
                 <h3 className="text-base font-semibold leading-6 text-primary">
                   <a href={action.href} className="focus:outline-none">
-                    {/* Extend touch target to entire panel */}
                     <span className="absolute inset-0" aria-hidden="true" />
                     {action.title}
                   </a>

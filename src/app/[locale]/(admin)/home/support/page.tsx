@@ -6,9 +6,10 @@ import SupportTicketsList from "./ui/SupportTicketsList";
 import SlideOver from "@/components/core/SlideOver";
 import NewTicketSupportForm from "./ui/NewTicketSupportForm";
 import { Metadata } from "next";
- 
+import { useTranslations } from "next-intl";
+
 export const metadata: Metadata = {
-  title: "Soporte",
+  title: "Support",
 };
 
 const AdminSupportPage = ({
@@ -21,26 +22,27 @@ const AdminSupportPage = ({
 }) => {
   const currentPage = Number(searchParams?.page) || 1;
   const query = searchParams?.query || "";
+  const t = useTranslations("AdminLayout.pages.support");
 
   return (
     <div>
       <PageName
-        name={"Soporte"}
+        name={t("support")}
         breadcrumbs={[
-          { name: "Escritorio", href: "/home" },
-          { name: "Soporte", href: "/home/support" },
+          { name: t("dashboard"), href: "/home" },
+          { name: t("support"), href: "/home/support" },
         ]}
         btn2={
           <SlideOver
             button={{
-              name: "Nuevo Ticket",
+              name: t("newTicket"),
             }}
           >
             <NewTicketSupportForm />
           </SlideOver>
         }
       />
-      <Search placeholder="Busca por ticket ID" />
+      <Search placeholder={t("searchTicketByID")} />
       <Suspense
         key={query + Math.random}
         fallback={<TableLoaderSkeleton count={10} />}

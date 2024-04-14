@@ -11,12 +11,13 @@ import {
 } from "@heroicons/react/24/outline";
 import { useSidebarState } from "@/states/ui/sidebarState";
 import Navigation from "../core/Navigation";
-import { adminNavigation } from "../layouts/AdminLayout";
 import Link from "next/link";
-import { OrganizationSwitcher   } from "@clerk/nextjs";
+import { OrganizationSwitcher } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import useDarkTheme from "@/app/hooks/useDarkTheme";
 import { constants } from "@/lib/constants";
+import { useNavigation } from "../layouts/useNavigation";
+import { useTranslations } from "next-intl";
 
 const AdminSidebar = () => {
   const { isDarkTheme } = useDarkTheme();
@@ -27,6 +28,8 @@ const AdminSidebar = () => {
     })
   );
 
+  const { adminNavigation } = useNavigation();
+  const t = useTranslations("AdminLayout.navigation");
 
   return (
     <div>
@@ -109,9 +112,9 @@ const AdminSidebar = () => {
                   <nav className="flex flex-1 flex-col">
                     <ul role="list" className="flex flex-1 flex-col gap-y-7">
                       <li>
-                          <ul role="list" className=" space-y-1">
-                            <Navigation navigation={adminNavigation} />
-                          </ul>
+                        <ul role="list" className=" space-y-1">
+                          <Navigation navigation={adminNavigation} />
+                        </ul>
                       </li>
                       <li className="mt-auto -mx-2">
                         <Link
@@ -123,7 +126,7 @@ const AdminSidebar = () => {
                             className="h-6 w-6 shrink-0 text-primary "
                             aria-hidden="true"
                           />
-                          Panel de afiliados
+                          {t("affiliatePanel")}
                         </Link>
                         <Link
                           onClick={() => toggleSidebarMenu()}
@@ -134,7 +137,7 @@ const AdminSidebar = () => {
                             className="h-6 w-6 shrink-0 text-primary "
                             aria-hidden="true"
                           />
-                          Soporte
+                          {t("support")}
                         </Link>
                         <Link
                           onClick={() => toggleSidebarMenu()}
@@ -146,7 +149,7 @@ const AdminSidebar = () => {
                             className="h-6 w-6 shrink-0 text-primary "
                             aria-hidden="true"
                           />
-                          Ajustes
+                          {t("settings")}
                         </Link>
                       </li>
                     </ul>
@@ -177,9 +180,9 @@ const AdminSidebar = () => {
           <nav className="flex flex-1 flex-col">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
               <li>
-                  <ul role="list" className=" space-y-1">
-                    <Navigation navigation={adminNavigation} />
-                  </ul>
+                <ul role="list" className=" space-y-1">
+                  <Navigation navigation={adminNavigation} />
+                </ul>
               </li>
 
               <li className="mt-auto">
@@ -192,7 +195,7 @@ const AdminSidebar = () => {
                     className="h-6 w-6 shrink-0 text-primary "
                     aria-hidden="true"
                   />
-                  Panel de afiliados
+                  {t("affiliatePanel")}
                 </Link>
                 <Link
                   onClick={() => toggleSidebarMenu()}
@@ -203,7 +206,7 @@ const AdminSidebar = () => {
                     className="h-6 w-6 shrink-0 text-primary "
                     aria-hidden="true"
                   />
-                  Soporte
+                  {t("support")}
                 </Link>
                 <Link
                   onClick={() => toggleSidebarMenu()}
@@ -215,7 +218,7 @@ const AdminSidebar = () => {
                     className="h-6 w-6 shrink-0 text-primary "
                     aria-hidden="true"
                   />
-                  Ajustes
+                  {t("settings")}
                 </Link>
               </li>
             </ul>

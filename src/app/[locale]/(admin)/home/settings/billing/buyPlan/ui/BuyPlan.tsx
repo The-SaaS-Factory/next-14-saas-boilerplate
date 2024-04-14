@@ -13,10 +13,14 @@ import Link from "next/link";
 import { useUser } from "@clerk/nextjs";
 import { AdminCurrencies, PaymentMethod } from "@prisma/client";
 import { Select, SelectItem } from "@tremor/react";
-import { parsePriceInLocalCurrency } from "@/utils/facades/frontendFacades/parseValuesFacade";
+import {
+  parsePriceInLocalCurrency,
+  traslateData,
+} from "@/utils/facades/frontendFacades/parseValuesFacade";
 import { IPricing, PlanType } from "@/interfaces/billingModule";
 import { constants } from "@/lib/constants";
 import usePaymentMethods from "@/app/hooks/usePaymentMethods";
+import { useLocale, useTranslations } from "next-intl";
 export type SettingType = {
   settingName: string;
   settingValue: string;
@@ -30,22 +34,23 @@ type PageParams = {
 };
 
 const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
-
   //States
   const [currencySelected, setCurrencySelected] = useState<any>(
     currencies.find((currency: AdminCurrencies) => currency.main)
   );
 
+  const t = useTranslations("AdminLayout.pages.plans");
   const [selectMethodModal, setSelectMethodModal] = useState(false);
   const handleSetOpenModal = () => setSelectMethodModal(!selectMethodModal);
   const [planSelected, setPlanSelected] = useState<any>(null);
   const [pricing, setPricing] = useState<any>({
     frequencies: [
-      { value: "month", label: "Monthly", priceSuffix: "/month" },
-      { value: "year", label: "Annually", priceSuffix: "/year" },
+      { value: "month", label: t("monthly"), priceSuffix: t("/month") },
+      { value: "year", label: t("annually"), priceSuffix: t("/year") },
     ],
   });
   const [frequency, setFrequency] = useState(pricing.frequencies[0]);
+  const locale = useLocale();
 
   useEffect(() => {
     const allFrequencies: string[] = [];
@@ -53,7 +58,6 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
     plans?.map((plan: PlanType) => {
       plan.pricing?.map((pricing: IPricing) => {
         if (plan.status === "ACTIVE") {
-          //Check if not exit in array
           if (!allFrequencies.includes(pricing.frequency)) {
             allFrequencies.push(pricing.frequency);
           }
@@ -62,7 +66,6 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
     });
 
     if (allFrequencies.length > 0) {
-      //#Fix types
       const formattedTypes: any = allFrequencies.map((typeName) => ({
         value: typeName,
         label: typeName.charAt(0).toUpperCase() + typeName.slice(1),
@@ -118,30 +121,19 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
             ))}
           </Select>
         </div>
-        {/* {plans?.pricing?.filter(
-          (pricing: any) =>
-            plan.type === frequency.value &&
-            plan.status === "ACTIVE" &&
-            plan.settings.filter(
-              (setting: SettingType) =>
-                setting.settingName ===
-                "STRIPE_PLAN_ID_" + currencySelected.code.toLowerCase()
-            ).length > 0
-        ).length > 0 ? ( */}
+
         <section id="Membership">
           <div className="mx-auto flex flex-col mt-3 max-w-7xl px-6   lg:px-8">
             <div className="mx-auto max-w-4xl sm:text-center">
               <h2 className="text-base font-semibold leading-7 text-indigo-600">
-                Pricing
+                {t("pricing")}
               </h2>
               <p className="mt-2 mega-title">
-                Planes de fidelidad en {constants.appName}
+                {t("plansOfFidelity")} {constants.appName}
               </p>
             </div>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600 sm:text-center">
-              Si necesitas de nuestros servicios regularmente y quieres
-              beneficiarte de descuentos, te recomendamos que contrates uno de
-              nuestros planes de fidelidad.{" "}
+              {t("plansOfFidelityDescription")}
             </p>
 
             <div className="flex max-lg my-14 px-7  justify-between">
@@ -158,7 +150,7 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                           ring-inset ring-gray-200`}
                       >
                         <RadioGroup.Label className="sr-only">
-                          Payment frequency
+                          {t("paymentFrequency")}
                         </RadioGroup.Label>
                         {pricing.frequencies.map((option: any) => (
                           <RadioGroup.Option
@@ -202,12 +194,13 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                             id={tier.id}
                             className="text-lg font-semibold leading-8 title"
                           >
-                            {plan.name}
+                            {traslateData(plan.name, locale)}
                           </h2>
                           <div
                             className="mt-4 magic-link  text-sm max-w-sm leading-6 subtitle"
                             dangerouslySetInnerHTML={{
-                              __html: plan.description ?? "",
+                              __html:
+                                traslateData(plan.description, locale) ?? "",
                             }}
                           ></div>
                           <p className="mt-6 flex items-baseline gap-x-1">
@@ -249,9 +242,17 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                                           </button>
                                         )}{" "}
                                         <div className="flex flex-col">
-                                          <span>{capa.capabilitie.title}</span>
+                                          <span>
+                                            {traslateData(
+                                              capa.capabilitie.title,
+                                              locale
+                                            )}
+                                          </span>
                                           <p className="text-sm text-gray-500">
-                                            {capa.capabilitie.description}
+                                            {traslateData(
+                                              capa.capabilitie.description,
+                                              locale
+                                            )}
                                           </p>
                                         </div>
                                       </div>
@@ -279,7 +280,7 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                               "mt-6 block rounded-md py-2 px-3 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                             )}
                           >
-                            Comprar plan
+                            {t("buyPlan")}{" "}
                           </button>
                         </div>
                       </div>
@@ -289,11 +290,6 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
             </div>
           </div>
         </section>
-        {/* ) : (
-          <div className="flex justify-center w-full items-center h-96">
-            <NotFound message="No plans found in this currency" />
-          </div>
-        )} */}
       </div>
     </div>
   );
@@ -338,6 +334,8 @@ export function SelectPaymentMethod({
     }
   };
 
+  const t = useTranslations("AdminLayout.pages.plans");
+
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -381,7 +379,7 @@ export function SelectPaymentMethod({
                           as="h3"
                           className="text-base font-semibold leading-6 text"
                         >
-                          Selecciona el método de pago en{" "}
+                          {t("selectPaymentMethod")}
                           {currencySelected.name}
                         </Dialog.Title>
                       </div>
@@ -401,7 +399,7 @@ export function SelectPaymentMethod({
                                   handleSelectPaymentMethod(paymentMethod);
                                 }}
                               >
-                                Pay with {paymentMethod.name}
+                                {t("payWith")} {paymentMethod.name}
                                 {paymentMethod.image && (
                                   <Image
                                     width={100}
@@ -417,26 +415,6 @@ export function SelectPaymentMethod({
                         })}
                       </div>
 
-                      {/* {stripeEnabled &&
-                        currencySelected.code !==
-                        (
-                          <button
-                            type="button"
-                            className="inline-flex w-full justify-center rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-start-2"
-                            onClick={() => {
-                              pay("stripe");
-                            }}
-                          >
-                            Pay with Debit / Credit Card by{" "}
-                            <Image
-                              width={100}
-                              height={30}
-                              src="/assets/img/stripe.png"
-                              className=" ml-3 h-5  w-auto"
-                              alt="Stripe"
-                            />
-                          </button>
-                        )} */}
                       <br />
                       <button
                         type="button"
@@ -444,17 +422,15 @@ export function SelectPaymentMethod({
                         onClick={() => setOpen()}
                         ref={cancelButtonRef}
                       >
-                        Cancel
+                        {t("cancel")}
                       </button>
                     </div>
                   </>
                 ) : (
                   <div className="flex flex-col  space-y-7">
-                    <h2 className="title text-center pt-7">
-                      You must be logged in to buy a plan
-                    </h2>
+                    <h2 className="title text-center pt-7">{t("needLogin")}</h2>
                     <Link href={"/home"} className="btn-main mx-auto">
-                      Log in
+                      {t("login")}
                     </Link>
                   </div>
                 )}
