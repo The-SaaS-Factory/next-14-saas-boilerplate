@@ -140,13 +140,6 @@ const InvoicesList = async ({
               </TableBody>
             </Table>
             <div className="flex mt-7 justify-between">
-              <div className="text-primary">
-                {t("showing")} <span className="font-medium">{offset + 1}</span>{" "}
-                {t("to")}{" "}
-                <span className="font-medium">{offset + data.length}</span>{" "}
-                {t("of")}
-                <span className="font-medium">{totalCount}</span> {t("results")}
-              </div>
               <Suspense
                 fallback={
                   <div>
@@ -154,7 +147,12 @@ const InvoicesList = async ({
                   </div>
                 }
               >
-                <Pagination totalPages={totalPages} />
+                <Pagination
+                  offset={offset}
+                  dataLength={data.length}
+                  totalCount={totalCount}
+                  totalPages={totalPages}
+                />
               </Suspense>
             </div>
           </div>

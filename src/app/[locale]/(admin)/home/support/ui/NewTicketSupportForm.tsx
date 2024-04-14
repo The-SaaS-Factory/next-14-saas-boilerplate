@@ -3,45 +3,48 @@ import { createSupportTickets } from "@/actions/global/supportModule/create-supp
 import NewForm from "@/components/core/NewForm";
 import { useSideOverState } from "@/states/ui/slideOverState";
 import { SupportDepartamentType } from "@prisma/client";
+import { useTranslations } from "next-intl";
 import React from "react";
 
 const NewTicketSupportForm = () => {
+  const t = useTranslations("AdminLayout.pages.support");
+
   const fields = [
     {
       name: "subject",
-      label: "Asunto",
+      label:  t("subject"),
       type: "text",
       required: true,
     },
     {
       name: "departament",
-      label: "Departamento",
+      label: t("departament"),
       type: "select",
       required: true,
       options: [
         {
-          optionName: "Billing",
+          optionName: t("billing"),
           optionValue: SupportDepartamentType.BILLING,
         },
         {
-          optionName: "Sales",
+          optionName:   t("sales"),
           optionValue: SupportDepartamentType.SALES,
         },
         {
-          optionName: "Support",
+          optionName: t("support"),
           optionValue: SupportDepartamentType.SUPPORT,
         },
       ],
     },
     {
       name: "description",
-      label: "Descripción",
+      label:  t("description"),
       type: "textarea",
       required: true,
     },
     {
       name: "images",
-      label: "Imágenes",
+      label: t("images"),
       type: "gallery",
       required: true,
     },
@@ -58,7 +61,7 @@ const NewTicketSupportForm = () => {
   return (
     <>
       <NewForm fields={fields} onSubmit={handleSendForm}
-      customSaveButtonText="Enviar"
+      customSaveButtonText={t("sendTicket")}
        
       />
     </>

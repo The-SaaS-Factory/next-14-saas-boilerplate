@@ -205,9 +205,17 @@ const NewForm = ({
             }
           } else {
             if (field.hasLanguageSupport) {
+              
+              let parsedValue;
+              try {
+                parsedValue = JSON.parse(values[fieldName]);
+              } catch (error) {
+                parsedValue = values[fieldName];
+              }
+
               const newValues =
                 typeof values[fieldName] === "string"
-                  ? JSON.parse(values[fieldName])
+                  ? parsedValue
                   : values[fieldName];
 
               console.log(newValues);
@@ -289,7 +297,7 @@ const NewForm = ({
                             <TabList
                               variant="line"
                               defaultValue={locales[0]}
-                              className={`mt-4 divide-x-2 divide-gray-300 
+                              className={`  divide-x-2 divide-gray-300 
                             space-x-3 uppercase p-3
                             `}
                             >
@@ -300,7 +308,7 @@ const NewForm = ({
                                   }
                                   className={`px-3
                               ${
-                                langSelected ===  field.name + "_" + langT
+                                langSelected === field.name + "_" + langT
                                   ? "bg-sky-100 rounded-md"
                                   : ""
                               }
@@ -422,7 +430,7 @@ const NewForm = ({
                             <TabList
                               variant="line"
                               defaultValue={locales[0]}
-                              className={`mt-4 divide-x-2 divide-gray-300 
+                              className={`  divide-x-2 divide-gray-300 
                             space-x-3 uppercase p-3
                             `}
                             >

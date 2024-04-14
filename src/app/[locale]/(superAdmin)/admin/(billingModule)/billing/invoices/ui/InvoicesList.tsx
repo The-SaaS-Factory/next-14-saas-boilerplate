@@ -142,12 +142,13 @@ const InvoicesList = async ({
               </TableBody>
             </Table>
             <div className="flex mt-7 justify-between">
-              <div className="text-primary">
-                Mostrando <span className="font-medium">{offset + 1}</span> a{" "}
-                <span className="font-medium">{offset + data.length}</span> de{" "}
-                <span className="font-medium">{totalCount}</span> resultados
-              </div>
-              <Pagination totalPages={totalPages} />
+             
+              <Pagination
+                offset={offset}
+                dataLength={data.length}
+                totalCount={totalCount}
+                totalPages={totalPages}
+              />
             </div>
           </div>
         )}

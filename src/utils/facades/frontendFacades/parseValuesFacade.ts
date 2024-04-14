@@ -51,8 +51,8 @@ export const parseNameFrequency = (frequency: string) => {
   }
 };
 
-export const traslateData = (string: string | object, locale: string) => {
-  let traduction: string | object = string;
+export const traslateData = (string: string | object | null, locale: string) => {
+  let traduction: string | object | null = string;
 
   if (typeof string === "string") {
     try {

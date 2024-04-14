@@ -46,12 +46,74 @@
         "methodPayment": "Payment Method",
         "date": "Date",
         "view": "View",
+
+        "notInvoiceFound": "No invoices found",
+        "viewInvoiceDetails": "View Invoice details"
+      },
+      "plans": {
+        "monthly": "Monthly",
+        "/month": "/month",
+        "/year": "/year",
+        "annually": "Annually",
+        "plans": "Plans",
+        "addPlan": "Add Plan",
+        "pricing": "Pricing",
+        "plansOfFidelity": "Plans of Fidelity in",
+        "plansOfFidelityDescription": "Plans of Fidelity description",
+        "paymentFrequency": "Payment Frequency",
+        "buyPlan": "Buy Plan",
+        "selectPaymentMethod": "Select Payment Method",
+        "payWith": "Pay with",
+        "cancel": "Cancel",
+        "needLogin": "You need to login to buy a plan",
+        "login": "Login"
+      },
+      "settings": {
+        "settings": "Settings",
+        "dashboard": "Dashboard",
+        "profile": "Profile",
+        "plansFidelity": "Plans of Fidelity"
+      },
+      "affiliates": {
+        "link": "Link of Affiliate",
+        "dashboard": "Dashboard",
+        "refferals": "Refferals",
+        "name": "Name",
+        "date": "Date of Register",
+        "totalAffiliates": "Total of Refferals",
+        "referralLink": "My link of Affiliate",
+        "affiliatePanel": "Affiliate Panel",
+        "referralLinkDescription": "Earn money by recommending our services"
+      },
+      "support": {
+        "support": "Support",
+        "dashboard": "Dashboard",
+        "images": "Images",
+        "description": "Description",
+        "ticket": "Ticket",
+        "sendTicket": "Send Ticket",
+        "newTicket": "New Ticket",
+        "searchTicketByID": "Search Ticket by ID",
+        "viewTicketDetails": "View Ticket details",
+        "subject": "Subject",
+        "status": "Status",
+        "date": "Date",
+        "view": "View",
+        "addMessage": "Add Message",
+        "showing": "Showing",
+        "departament": "Departament",
+        "billing": "Billing",
+        "notTicketFound": "No tickets found",
+        "sales": "Sales",
+        "send": "Send"
+      }
+    },
+    "commons": {
+      "pagination": {
         "showing": "Showing",
         "results": "Results",
         "of": "of",
-        "to": "to",
-        "notInvoiceFound":  "No invoices found",
-        "viewInvoiceDetails": "View Invoice details"
+        "to": "to"
       }
     }
   },

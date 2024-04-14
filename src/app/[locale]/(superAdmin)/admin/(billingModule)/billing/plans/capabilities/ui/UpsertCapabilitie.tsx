@@ -1,4 +1,4 @@
-import NewForm from "@/components/core/NewForm";
+import NewForm, { Field } from "@/components/core/NewForm";
 import { upsertCapabilitie } from "@/actions/superAdmin/superAdminBillingModule/upsert-capabilitie";
 
 const UpsertCapabilitie = ({
@@ -13,12 +13,13 @@ const UpsertCapabilitie = ({
     description: "Create a new plan capabilitie",
   };
 
-  const fields = [
+  const fields: Field[] = [
     {
       name: "title",
       label: "Name",
       type: "text",
       required: true,
+      hasLanguageSupport: true,
     },
     {
       name: "name",
@@ -48,6 +49,7 @@ const UpsertCapabilitie = ({
       label: "Description",
       type: "textarea",
       required: true,
+      hasLanguageSupport: true,
     },
   ];
 

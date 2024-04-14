@@ -98,7 +98,12 @@ const UserList = async ({
               <span className="font-medium">{offset + data.length}</span> de{" "}
               <span className="font-medium">{totalCount}</span> resultados
             </div>
-            <Pagination totalPages={totalPages} />
+            <Pagination
+                offset={offset}
+                dataLength={data.length}
+                totalCount={totalCount}
+                totalPages={totalPages}
+              />
           </div>
         </div>
       )}

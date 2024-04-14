@@ -1,20 +1,23 @@
-import React, { ReactNode } from 'react';
-import PageName from '@/components/ui/commons/PageName';
-import AdminAffilatesTabs from './ui/AdminAffilatesTabs';
+import React, { ReactNode } from "react";
+import PageName from "@/components/ui/commons/PageName";
+import AdminAffilatesTabs from "./ui/AdminAffilatesTabs";
+import { useTranslations } from "next-intl";
 
 const SettingRoot = ({ children }: { children: ReactNode }) => {
+  const t = useTranslations("AdminLayout.pages.affiliates");
+
   return (
     <div>
       <PageName
-        name={'Panel de Afiliados'}
+        name={t("affiliatePanel")}
         breadcrumbs={[
           {
-            name: 'Escritorio',
-            href: '/home',
+            name:  t("dashboard"),
+            href: "/home",
           },
           {
-            name: 'Afiliados',
-            href: '/home/affiliates',
+            name: t("refferals"),
+            href: "/home/affiliates",
           },
         ]}
       />
