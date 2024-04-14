@@ -1,5 +1,6 @@
 "use client";
 
+import { constants } from "@/lib/constants";
 import { useEffect } from "react";
 import { FloatingWhatsApp } from "react-floating-whatsapp";
 
@@ -21,20 +22,20 @@ const FloatingWhatsAppButton = () => {
   }, []);
 
   const getPhoneNumber = () => {
-    if (typeof window !== "undefined") {
-      const country = localStorage.getItem("country");
+    // if (typeof window !== "undefined") {
+    //   const country = localStorage.getItem("country");
 
-      switch (country) {
-        case "CU":
-          return "+5541999568376";
-        case "BR":
-          return "+5541999568376";
-        default:
-          return "+5541999568376";
-      }
-    } else {
+    //   switch (country) {
+    //     case "CU":
+    //       return "+57777777777";
+    //     case "BR":
+    //       return "+7777777";
+    //     default:
+    //       return "+777777";
+    //   }
+    // } else {
       return "+5541999568376";
-    }
+   // }
   };
 
   return (
@@ -44,7 +45,7 @@ const FloatingWhatsAppButton = () => {
           typeof window !== "undefined" ? getPhoneNumber() : "5541999568376"
         }
         accountName="The Boilerplate Support"
-        avatar="https://hostingclan.com/assets/img/logowhite.png"
+        avatar={constants.logoUrl}
         darkMode={false}
         allowEsc
       />
