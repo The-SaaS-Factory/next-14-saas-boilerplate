@@ -6,7 +6,6 @@ import { getInvoiceTotal } from "@/utils/facades/serverFacades/paymentFacade";
 import { CalendarDaysIcon, TicketIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import React, { Suspense } from "react";
-import { formatTimestampToDateString } from "../../../../../utils/facades/serverFacades/strFacade";
 import { getSuperAdminSetting } from "@/utils/facades/serverFacades/adminFacade";
 import { parsePriceInLocalCurrency } from "@/utils/facades/frontendFacades/parseValuesFacade";
 import { getPaymentMethods } from "@/actions/superAdmin/superAdminBillingModule/get-all-payment-methods";
@@ -16,6 +15,7 @@ import TableLoaderSkeleton from "@/components/ui/loaders/TableLoaderSkeleton";
 import SlideOver from "@/components/core/SlideOver";
 import CouponCodeSectionForInvoices from "./CouponCodeSectionForInvoices";
 import PrintInvoiceButton from "./PrintInvoiceButton";
+import { formatTimestampToDateString } from "@/utils/facades/serverFacades/strFacade";
 
 const ViewInvoiceDetails = async ({ invoice }: { invoice: IInvoice }) => {
   if (!invoice) return <ForbiddenPage />;

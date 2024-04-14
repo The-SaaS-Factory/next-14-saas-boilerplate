@@ -19,7 +19,6 @@ export default function SuperAdminMiddleware({
     );
   }
 
-  console.log(loadingIsSuperAdmin, isSuperAdmin);
   
 
   return <>{isSuperAdmin ? children : <ForbiddenPage />}</>;

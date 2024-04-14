@@ -1,7 +1,11 @@
 import { authMiddleware, redirectToSignIn } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
-//import { authMiddleware, redirectToSignIn } from "@clerk/nextjs";
-//import { NextResponse } from "next/server";
+import createMiddleware from "next-intl/middleware";
+
+const intlMiddleware = createMiddleware({
+  locales: ["en", "es"],
+  defaultLocale: "en",
+});
 
 export default authMiddleware({
   publicRoutes: [
@@ -11,7 +15,12 @@ export default authMiddleware({
     "/api/stripe",
     "/api/test",
     "/api/cron",
+    "/:locale",
+    "/:locale/sign-in",
   ],
+  beforeAuth(request) {
+    return intlMiddleware(request);
+  },
   afterAuth(auth, req) {
     const url = req.nextUrl;
     let hostname = req.headers
@@ -30,8 +39,6 @@ export default authMiddleware({
 
     // Catch users who doesn't have `onboardingComplete: true` in PublicMetata
     // Redirect them to the /onboading out to complete onboarding
-    console.log(sessionClaims?.metadata);
-    
     if (userId && !sessionClaims?.metadata?.onboardingComplete) {
       const onboardingUrl = new URL("/onboarding", req.url);
       return NextResponse.redirect(onboardingUrl);

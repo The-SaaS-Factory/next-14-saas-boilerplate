@@ -3,7 +3,6 @@ import React, { Suspense } from "react";
 import { Metadata } from "next";
 import TableLoaderSkeleton from "@/components/ui/loaders/TableLoaderSkeleton";
 import { getInvoiceDetails } from "@/actions/superAdmin/superAdminBillingModule/get-invoice-details";
-import ViewInvoiceDetails from "@/app/(admin)/home/invoices/ui/ViewInvoiceDetails";
 import { IInvoice } from "@/interfaces/billingModule";
 import OperateInvoiceAsSuperAdmin from "../ui/OperateInvoiceAsSuperAdmin";
 import {
@@ -11,6 +10,7 @@ import {
   PencilIcon,
 } from "@heroicons/react/24/outline";
 import TabsClientSide from "@/components/core/TabsClientSide";
+import ViewInvoiceDetails from "@/app/[locale]/(admin)/home/invoices/ui/ViewInvoiceDetails";
 
 export const metadata: Metadata = {
   title: "View Invoice Details",

@@ -9,11 +9,13 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default async function RootLayout({
   children,
+  params: {locale}
 }: {
   children: ReactNode;
+  params: {locale: string};
 }) {
   return (
-    <html lang="es">
+    <html lang={locale} className="antialiased">
       <ClerkProvider afterSignUpUrl="/home" afterSignInUrl="/home">
         <body className={inter.className}>{children}</body>
         <Toaster richColors={true} position="top-center" />
@@ -22,3 +24,6 @@ export default async function RootLayout({
     </html>
   );
 }
+
+
+ 

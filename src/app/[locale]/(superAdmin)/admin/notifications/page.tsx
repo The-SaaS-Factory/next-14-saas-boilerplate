@@ -1,4 +1,4 @@
-import NotificationsList from "@/app/(admin)/home/notifications/ui/NotificationsList";
+import NotificationsList from "@/app/[locale]/(admin)/home/notifications/ui/NotificationsList";
 import PageName from "@/components/ui/commons/PageName";
 import { Metadata } from "next";
 
