@@ -1,4 +1,5 @@
 "use client";
+import LocaleSwitcher from "@/components/core/LocaleSwitcher";
 import { constants } from "@/lib/constants";
 import { SignedIn, SignedOut, useUser } from "@clerk/nextjs";
 import { Dialog } from "@headlessui/react";
@@ -60,7 +61,10 @@ export const HeaderLanding = () => {
               </Link>
             ))}
           </div>
-          <div className="lg:ml-32">
+          <div className="lg:ml-32 flex  space-x-7 items-center">
+            <div className=" hidden lg:flex">
+              <LocaleSwitcher />
+            </div>
             <SignedIn>
               <div className="ml-32">
                 <Link href="/home">
@@ -107,7 +111,7 @@ export const HeaderLanding = () => {
             </button>
           </div>
           <div className="mt-6 flow-root">
-            <div className="-my-6 divide-y divide-gray-500/25">
+            <div className="-my-6  ">
               <div className="space-y-2 py-6">
                 {navigation.map((item) => (
                   <a
@@ -119,13 +123,19 @@ export const HeaderLanding = () => {
                   </a>
                 ))}
               </div>
-              <div className="py-6">
+              <hr className="bg-gray-500/25 h-1  " />
+              <div className="py-6  flex flex-col">
                 <Link
                   href="/home"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-800"
                 >
                   Login / Register
                 </Link>
+
+                <hr className="bg-gray-500/25 h-1 my-7" />
+                <div className="   lg:hidden">
+                  <LocaleSwitcher />
+                </div>
               </div>
             </div>
           </div>
