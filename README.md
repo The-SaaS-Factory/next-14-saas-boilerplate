@@ -82,13 +82,7 @@ Our vision is that a programmer with a regular job can, with this boilerplate, l
  - [x] SEO friendly (SSR by Next 14)
  - [x] Vercel Analytic integration
 
-
-## Road map
-For January:
- - [ ] Improving TypeScript typing
- - [ ] Improve core components
- - [ ] Add translations to Spanish and Portuguese
-
+ 
  ## Screenshots
  ![enter image description here](https://ik.imagekit.io/cluzstudio/01-cluzstudio/screely-1703716752301_xVVckTVwk.png?updatedAt=1703716824119)![enter image description here](https://ik.imagekit.io/cluzstudio/01-cluzstudio/screely-1703720465815_uSi8i2AMI.png?updatedAt=1703720616191)
 ![enter image description here](https://ik.imagekit.io/cluzstudio/01-cluzstudio/screely-1703721109176_NE5QpcmxF.png?updatedAt=1703721147856)
