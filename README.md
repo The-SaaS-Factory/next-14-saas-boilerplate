@@ -24,20 +24,8 @@ Our vision is that a programmer with a regular job can, with this boilerplate, l
   - 12/28
   - 123
 
-<!-- ## Demo
-[https://demo.thesaasfactory.dev/](https://demo.thesaasfactory.dev/)
-
- **Super Admin Credentials**
-   - email: thesaasfactory@gmail.com
-   - pass: Demo@2023
-
-  **Stripe test card number**
-   - 4242 4242 4242 4242
-   - 12/28
-   - 123  -->
-
-<!-- ## Documentation 
-[https://docs.thesaasfactory.dev/](https://docs.thesaasfactory.dev/) -->
+## Documentation 
+[https://docs-next14.thesaasfactory.dev/](https://docs-next14.thesaasfactory.dev/)  
 
 ## Top Features
 1.  **Next.js 14:**  Utilize the power of Next.js to build server-side rendered React applications that are optimized for performance and SEO, providing a seamless user experience across all devices. Backend and frontend are in the same project, making it easier to manage and deploy your application.
