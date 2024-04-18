@@ -7,10 +7,10 @@ async function BtnBuyService() {
   return (
     <div className="flex space-x-3">
       <Link
-        href="home/services/buy-service"
+        href="https://github.com/The-SaaS-Factory/next-14-saas-boilerplate/"
         className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-primary shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
       >
-       Buy now
+        View Github Repo 
       </Link>
 
       <Link
