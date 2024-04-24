@@ -1,0 +1,137 @@
+{
+  "Index": {
+    "title": "Olá mundo!"
+  },
+  "LocaleSwitcher": {
+    "label": "Trocar idioma",
+    "locale": "{locale, select, de {🇩🇪 Alemão} en {🇺🇸 Inglês} es {es Espanhol} other {Desconhecido}}"
+  },
+  "AdminLayout": {
+    "navigation": {
+      "general": "Geral",
+      "dashboard": "Painel",
+      "examples": "Exemplos",
+      "exampleTitle": "Título da página de exemplo",
+      "btnExample": "Exemplo de botão",
+      "exampleOne": "Exemplo um",
+      "billing": "Faturamento",
+      "invoices": "Faturas",
+      "wallet": "Carteira",
+      "affiliatePanel": "Painel de afiliados",
+      "settings": "Configurações",
+      "support": "Suporte"
+    },
+    "pages": {
+      "dashboard": {
+        "title": "Painel",
+        "subtitle": "Bem-vindo ao seu painel",
+        "actionOne": "Faça seu primeiro pedido",
+        "actionOneDescription": "Vá para a seção de faturamento e faça seu primeiro pedido",
+        "actionTwo": "Gerencie sua carteira",
+        "actionTwoDescription": "Verifique o saldo da sua carteira",
+        "exampleActive": "Exemplos ativos",
+        "invoicesInPaid": "Faturas pendentes",
+        "tickersActives": "Tickers ativos"
+      },
+      "wallet": {
+        "yourWallet": "Minha carteira",
+        "seeMovements": "Ver movimentos",
+        "movementIn": "Movimentos em",
+        "notMovemenetsFound": "Nenhum movimento encontrado nesta moeda"
+      },
+      "invoices": {
+        "invoices": "Faturas",
+        "total": "Total",
+        "status": "Status",
+        "methodPayment": "Método de pagamento",
+        "date": "Data",
+        "view": "Ver",
+        "notInvoiceFound": "Nenhuma fatura encontrada",
+        "viewInvoiceDetails": "Ver detalhes da fatura"
+      },
+      "plans": {
+        "monthly": "Mensal",
+        "/month": "/mês",
+        "/year": "/ano",
+        "annually": "Anualmente",
+        "plans": "Planos",
+        "addPlan": "Adicionar plano",
+        "pricing": "Preços",
+        "plansOfFidelity": "Planos de fidelidade em",
+        "plansOfFidelityDescription": "Descrição dos planos de fidelidade",
+        "paymentFrequency": "Frequência de pagamento",
+        "buyPlan": "Comprar plano",
+        "selectPaymentMethod": "Selecionar método de pagamento",
+        "payWith": "Pagar com",
+        "cancel": "Cancelar",
+        "needLogin": "Você precisa fazer login para comprar um plano",
+        "login": "Entrar"
+      },
+      "settings": {
+        "settings": "Configurações",
+        "dashboard": "Painel",
+        "profile": "Perfil",
+        "plansFidelity": "Planos de fidelidade"
+      },
+      "affiliates": {
+        "link": "Link de afiliado",
+        "dashboard": "Painel",
+        "refferals": "Referências",
+        "name": "Nome",
+        "date": "Data de registro",
+        "totalAffiliates": "Total de referências",
+        "referralLink": "Meu link de afiliado",
+        "affiliatePanel": "Painel de afiliados",
+        "referralLinkDescription": "Ganhe dinheiro recomendando nossos serviços"
+      },
+      "support": {
+        "support": "Suporte",
+        "dashboard": "Painel",
+        "images": "Imagens",
+        "description": "Descrição",
+        "ticket": "Ticket",
+        "sendTicket": "Enviar ticket",
+        "newTicket": "Novo ticket",
+        "searchTicketByID": "Buscar ticket por ID",
+        "viewTicketDetails": "Ver detalhes do ticket",
+        "subject": "Assunto",
+        "status": "Status",
+        "date": "Data",
+        "view": "Ver",
+        "addMessage": "Adicionar mensagem",
+        "showing": "Mostrando",
+        "departament": "Departamento",
+        "billing": "Faturamento",
+        "notTicketFound": "Nenhum ticket encontrado",
+        "sales": "Vendas",
+        "send": "Enviar"
+      }
+    },
+    "commons": {
+      "pagination": {
+        "showing": "Mostrando",
+        "results": "Resultados",
+        "of": "de",
+        "to": "a"
+      }
+    }
+  },
+  "SuperAdminLayout": {
+    "navigation": {
+      "general": "Geral",
+      "dashboard": "Painel",
+      "examples": "Exemplos",
+      "exampleTitle": "Título da página de exemplo",
+      "btnExample": "Exemplo de botão",
+      "exampleOne": "Exemplo um",
+      "billing": "Faturamento",
+      "invoices": "Faturas",
+      "users": "Usuários",
+      "plans": "Planos",
+      "suscriptions": "Assinaturas",
+      "coupons": "Cupons",
+      "support": "Suporte",
+      "settings": "Configurações"
+    }
+  }
+}
