@@ -4,7 +4,7 @@
   },
   "LocaleSwitcher": {
     "label": "Trocar idioma",
-    "locale": "{locale, select, de {🇩🇪 Alemão} en {🇺🇸 Inglês} es {es Espanhol} other {Desconhecido}}"
+    "locale": "{locale, select, de {🇩🇪 Alemão} en {🇺🇸 Inglês} es {es Espanhol} pt {pt Português} other {Desconhecido}}"
   },
   "AdminLayout": {
     "navigation": {
