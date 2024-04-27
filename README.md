@@ -69,6 +69,19 @@ Our vision is that a programmer with a regular job can, with this boilerplate, l
  - [x] Affiliate System with Affiliate Panel and Payments with comissions **This is good!**
  - [x] SEO friendly (SSR by Next 14)
  - [x] Vercel Analytic integration
+ 
+ ## Some projects using this boilerplate
+ 
+ - [HostingClan](https://hostingclan.com)
+ - [WavesTravel](https://waves.travel)
+ 
+ ## RoadMap
+ 
+ 
+ - [ ] Improve typing
+ - [ ] Add more documentation
+
+[Send a message on WhatsApp to add yours](https://wa.me/5541999568376?text=Hello,%20I%20created%20a%20project%20with%20your%20boilerplate%20and%20I'm%20interested%20in%20putting%20it%20on%20GitHub)
 
  
  ## Screenshots
