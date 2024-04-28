@@ -29,7 +29,7 @@ export default authMiddleware({
     let hostname = req.headers
       .get("host")!
       .replace(".localhost:3000", `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`);
-    const { userId, sessionClaims } = auth;
+    const { userId, sessionClaims, orgId } = auth;
     
     // For user visiting /onboarding, don't try and redirect
     if (userId && req.nextUrl.pathname.includes("onboarding") && !auth.isPublicRoute) {
@@ -46,7 +46,7 @@ export default authMiddleware({
 
     // Catch users who doesn't have `onboardingComplete: true` in PublicMetata
     // Redirect them to the /onboading out to complete onboarding
-    if (userId && !sessionClaims?.metadata?.onboardingComplete && !auth.isPublicRoute) {
+    if (userId && !orgId && !sessionClaims?.metadata?.onboardingComplete && !auth.isPublicRoute) {
       const onboardingUrl = new URL("/onboarding", req.url);
       return NextResponse.redirect(onboardingUrl);
     }
