@@ -2,6 +2,7 @@ export const constants = {
   appUrl: "https://hostingclan.com",
   appName: "Boilerplate",
   logoUrl: "/assets/img/logo-next-14-white.png",
+  logoDarkUrl: "/assets/img/logo-next-14-dark.png",
   appResume: "The best boilerplate in Next 14.",
   demoMode: process.env.NEXT_PUBLIC_DEMO_MODE === "true",
 };
