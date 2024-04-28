@@ -17,16 +17,16 @@ type NavigationItem = {
   current: boolean;
 };
 
-const Navigation = ({
-  navigation,
-}: {
-  navigation: NavigationSection[];
-}) => {
-  const {toggleSidebarMenu} = useSidebarState(({toggleSidebarMenu}) => ({toggleSidebarMenu}));
-  
-  const pathName =  usePathname();
- 
+const Navigation = ({ navigation }: { navigation: NavigationSection[] }) => {
+  const { toggleSidebarMenu } = useSidebarState(({ toggleSidebarMenu }) => ({
+    toggleSidebarMenu,
+  }));
+
+  const pathName = usePathname();
+  let seg = pathName.split("/");
+  let pathNameWithoutLand = "/" + seg.slice(2).join("/");
   const [links, setLinks] = useState<NavigationSection[]>([]);
+  console.log(pathNameWithoutLand);
 
   useEffect(() => {
     const linksWithStatus = navigation.map((section) => {
@@ -59,7 +59,7 @@ const Navigation = ({
                     href={item.href}
                     onClick={() => toggleSidebarMenu()}
                     className={classNames(
-                      item.href === pathName
+                      item.href === pathNameWithoutLand
                         ? "bg-main-selected text-primary-selected"
                         : " bg-main-hover",
                       "group flex gap-x-3 rounded-md p-2  text-primary"
@@ -67,7 +67,7 @@ const Navigation = ({
                   >
                     <item.icon
                       className={classNames(
-                        item.href === pathName
+                        item.href === pathNameWithoutLand
                           ? "text-primary-selected"
                           : "text-primary",
                         "h-6 w-6 shrink-0 text-primary-hover"
