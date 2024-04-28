@@ -9,16 +9,18 @@ import { auth } from "@clerk/nextjs";
 
 export default async function completeOnboarding(payload: any) {
   const userClerk = auth();
- 
+
   if (!userClerk) throw new Error("client clerk not found");
   const { userId } = await getUser(userClerk);
-  
+
+  let organization: any = null;
+
   await createClerkOrganization({
     name: payload.applicationName || "",
     createdBy: userClerk.userId,
   })
-    .then((data) => {
-      console.log(data);
+    .then((data: any) => {
+      organization = data;
     })
     .catch((error) => {
       console.log("Error creating organization", error);
@@ -35,7 +37,10 @@ export default async function completeOnboarding(payload: any) {
     },
   })
     .then(() => {
-      return "ok";
+      return  JSON.stringify({
+        organization,
+        message: "ok",
+      });
     })
     .catch((error) => {
       console.log("Error updating user metadata", error);

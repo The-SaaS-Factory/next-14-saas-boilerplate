@@ -6,8 +6,10 @@ import { toast } from "sonner";
 import ReactConfetti from "react-confetti";
 import { constants } from "@/lib/constants";
 import { useTranslations } from "next-intl";
+import { useOrganizationList } from "@clerk/nextjs";
 
 export default function Example() {
+  const { setActive, isLoaded } = useOrganizationList();
   const t = useTranslations("Onboarding");
   const [projectName, setProjectName] = useState("");
   const [isCompleted, setIsCompleted] = useState(false);
@@ -16,14 +18,15 @@ export default function Example() {
     await completeOnboarding({
       applicationName: projectName,
     })
-      .then((r) => {
-        console.log(r);
-        if (r === "ok") {
+      .then((rJson: any) => {
+        const response = JSON.parse(rJson);
+        if (response.message === "ok" && response.organization) {
+          isLoaded && setActive({ organization: response.organization.id });
           setIsCompleted(true);
           toast.success("Onboarding completed");
           setTimeout(() => {
             window.location.href = "/home";
-          }, 5000);
+          },6000);
         }
       })
       .catch((e) => {
@@ -63,10 +66,11 @@ export default function Example() {
                   <h1 className="text-title">
                     {t("welcome") + constants.appName}
                   </h1>
-                  <div className="mt-7">
+                  <div className="mt-7 flex flex-col space-y-3">
                     <label htmlFor="organizationName">
                       {t("organizationName")}
                     </label>
+
                     <input
                       type="text"
                       className="input-text"

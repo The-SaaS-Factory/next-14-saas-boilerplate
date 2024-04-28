@@ -132,13 +132,5 @@ export const createClerkUser = async (payload: any) => {
 };
 
 export const createClerkOrganization = async (payload: any) => {
-  const organization = await clerkClient.organizations.createOrganization(
-    payload
-  );
-  clerkClient.signInTokens.createSignInToken({
-    userId: organization.id,
-    expiresInSeconds: 77777,
-  });
-
-  return organization;
+  return await clerkClient.organizations.createOrganization(payload);
 };
