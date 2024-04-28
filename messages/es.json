@@ -2,6 +2,12 @@
   "Index": {
     "title": "¡Hola mundo!"
   },
+  "Onboarding": {
+    "welcome": "Bienvenido a ",
+    "completeOnboarding": "Completa el onboarding",
+    "redirecting": "Redireccionando",
+    "organizationName": "Nombre del proyecto"
+  },
   "LocaleSwitcher": {
     "label": "Cambiar idioma",
     "locale": "{locale, select, de {🇩🇪 Alemán} en {🇺🇸 Inglés} es {es Español} pt {pt Português} other {Desconocido}}"

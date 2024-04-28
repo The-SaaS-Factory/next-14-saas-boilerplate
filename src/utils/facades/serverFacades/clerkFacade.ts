@@ -102,12 +102,6 @@ export const getUserOrganizations = async (userId: number) => {
   const userClerkId = await getUserClerkId(userId);
 
   if (!userClerkId) throw new Error("User clerk not found");
-
-  //   const organizations = await clerkClient.users.getOrganizationMembershipList({
-  //     userId: userClerkId.externalId, //3
-  //   });
-
-  // return await clerkClient.users.getUser(user.externalId);
 };
 
 export const getClerkUserByExternalId = async (externalId: string) => {
@@ -135,4 +129,16 @@ export const deleteClerkUser = async (userId: string) => {
 
 export const createClerkUser = async (payload: any) => {
   return await clerkClient.users.createUser(payload);
+};
+
+export const createClerkOrganization = async (payload: any) => {
+  const organization = await clerkClient.organizations.createOrganization(
+    payload
+  );
+  clerkClient.signInTokens.createSignInToken({
+    userId: organization.id,
+    expiresInSeconds: 77777,
+  });
+
+  return organization;
 };

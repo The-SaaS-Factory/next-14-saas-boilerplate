@@ -4,12 +4,18 @@ import { Dialog, Transition } from "@headlessui/react";
 import completeOnboarding from "@/actions/global/onboarding/complete-onboarding";
 import { toast } from "sonner";
 import ReactConfetti from "react-confetti";
+import { constants } from "@/lib/constants";
+import { useTranslations } from "next-intl";
 
 export default function Example() {
+  const t = useTranslations("Onboarding");
+  const [projectName, setProjectName] = useState("");
   const [isCompleted, setIsCompleted] = useState(false);
   const [open, setOpen] = useState(true);
   const handleCompleteOnboarding = async () => {
-    await completeOnboarding("some data")
+    await completeOnboarding({
+      applicationName: projectName,
+    })
       .then((r) => {
         console.log(r);
         if (r === "ok") {
@@ -54,8 +60,20 @@ export default function Example() {
             <Dialog.Panel className="mx-auto p-7 max-w-2xl transform divide-y divide-gray-500 divide-opacity-10 overflow-hidden rounded-xl bg-white bg-opacity-80 shadow-2xl ring-1 ring-black ring-opacity-5 backdrop-blur backdrop-filter transition-all">
               <div className="flex flex-col text-center">
                 <div className="mx-auto my-14">
-                  <h1 className="text-title">Welcome to the admin panel</h1>
-                  <p className="mt-32">Put your form here</p>
+                  <h1 className="text-title">
+                    {t("welcome") + constants.appName}
+                  </h1>
+                  <div className="mt-7">
+                    <label htmlFor="organizationName">
+                      {t("organizationName")}
+                    </label>
+                    <input
+                      type="text"
+                      className="input-text"
+                      onChange={(e) => setProjectName(e.target.value)}
+                      placeholder={t("organizationName")}
+                    />
+                  </div>
                 </div>
                 {isCompleted && <ReactConfetti width={1000} height={1000} />}
                 {!isCompleted ? (
@@ -63,10 +81,10 @@ export default function Example() {
                     onClick={handleCompleteOnboarding}
                     className="btn-main w-[50%] mx-auto"
                   >
-                    Complete onboarding
+                    {t("completeOnboarding")}
                   </button>
                 ) : (
-                  <p className="animate-pulse">Redirecting ...</p>
+                  <p className="animate-pulse"> {t("redirecting")} ...</p>
                 )}
               </div>
             </Dialog.Panel>
