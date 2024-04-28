@@ -103,6 +103,7 @@ const AdminSidebar = () => {
                       appearance={{
                         baseTheme: isDarkTheme ? dark : undefined,
                       }}
+                      hidePersonal={true}
                       afterSelectPersonalUrl={"/home"}
                       afterSelectOrganizationUrl={"/home"}
                       afterCreateOrganizationUrl={"/home"}

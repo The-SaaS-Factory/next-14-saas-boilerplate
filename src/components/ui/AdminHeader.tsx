@@ -59,6 +59,7 @@ const AdminHeader = ({
                     appearance={{
                       baseTheme: isDarkTheme ? dark : undefined,
                     }}
+                    hidePersonal={true}
                     afterSelectPersonalUrl={"/home"}
                     afterSelectOrganizationUrl={"/home"}
                     afterCreateOrganizationUrl={"/welcome"}
