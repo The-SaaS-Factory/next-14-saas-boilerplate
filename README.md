@@ -28,7 +28,7 @@ Our vision is that a programmer with a regular job can, with this boilerplate, l
 [https://docs-next14.thesaasfactory.dev/](https://docs-next14.thesaasfactory.dev/)  
 
 ## Top Features
-1.  **Next.js 14:**  Utilize the power of Next.js to build server-side rendered React applications that are optimized for performance and SEO, providing a seamless user experience across all devices. Backend and frontend are in the same project, making it easier to manage and deploy your application.
+1.  **Next.js 14:**  Use the power of Next.js to build server-side rendered React applications that are optimized for performance and SEO, providing a seamless user experience across all devices. Backend and frontend are in the same project, making it easier to manage and deploy your application.
     
 2.  **TypeScript:**  Leverage the power of TypeScript's static typing system to detect and prevent errors at compile time, providing increased confidence and productivity during development.
     
@@ -42,8 +42,8 @@ Our vision is that a programmer with a regular job can, with this boilerplate, l
     
 7.  **Stripe:**  Stripe is the best payment gateway to manage subscriptions and payments
 
-## Integrated modules
-
+## Integrated modules / Features
+ - [x] Multi-tenancy support: create, switch, update organization and invite members
  - [x] Landing Page 
  - [x] Full Internationalization support (Frontent componenets and Dynamic Data) **This is good!**
  - [x] Responsive 
@@ -59,7 +59,7 @@ Our vision is that a programmer with a regular job can, with this boilerplate, l
  - [x] Marketing Module
  - [x] Stripe Invoices and memberships Module
  - [x] Imagekit Integration for Media Storage
- - [x] Internal components to help you create cruds quickly
+ - [x] Internal components to help you create cruds quickly (newForm)
  - [x] User management
  - [x] Organization management
  - [x] Subscriptions management
@@ -69,6 +69,9 @@ Our vision is that a programmer with a regular job can, with this boilerplate, l
  - [x] Affiliate System with Affiliate Panel and Payments with comissions **This is good!**
  - [x] SEO friendly (SSR by Next 14)
  - [x] Vercel Analytic integration
+ - [x] Role-based access control and permissions
+ - [x] Absolute Imports using @ prefix
+ - [x] Social Auth (Google, Facebook, Twitter, GitHub, Apple, and more) (Clerk)
  
  ## Some projects using this boilerplate
  
