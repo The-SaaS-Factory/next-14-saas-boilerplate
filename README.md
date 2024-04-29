@@ -1,7 +1,7 @@
 
 ![Next 14 SaaS Boilerplate](https://ik.imagekit.io/cluzstudio/01-cluzstudio/Dise%C3%B1o%20sin%20t%C3%ADtulo_cKYZma6T2.png?updatedAt=1714418917107)
  
-# The SaaS Factory Boilerplate - Next 14 FullStack Version
+# Next 14 FullStack SaaS Boilerplate by The SaaS Factory
 
 ## The standard model for launching free, open source, SaaS products faster
   
