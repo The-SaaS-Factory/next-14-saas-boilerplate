@@ -1,5 +1,5 @@
 
-![Next 14 SaaS Boilerplate]([https://ik.imagekit.io/cluzstudio/saasfactory/Next%2014%20boilerpalte%20fullstack%20structure_4oB_e7fds.png?updatedAt=1713036422299](https://ik.imagekit.io/cluzstudio/01-cluzstudio/Dise%C3%B1o%20sin%20t%C3%ADtulo_cKYZma6T2.png?updatedAt=1714418917107))
+![Next 14 SaaS Boilerplate](https://ik.imagekit.io/cluzstudio/01-cluzstudio/Dise%C3%B1o%20sin%20t%C3%ADtulo_cKYZma6T2.png?updatedAt=1714418917107)
  
 # The SaaS Factory Boilerplate - Next 14 FullStack Version
 
