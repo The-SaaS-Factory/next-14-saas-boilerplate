@@ -30,10 +30,7 @@ if (typeof findId === "string" && findId !== "") {
     whereSearch = {
       OR: [
         {
-          id:
-            typeof findId === "string" && findId !== ""
-              ? parseInt(findId ?? '0')
-              : 0,
+          id: findId
         },
         {
           name: {
