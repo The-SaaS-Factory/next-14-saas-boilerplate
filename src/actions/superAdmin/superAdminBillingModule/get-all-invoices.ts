@@ -14,17 +14,20 @@ export const getAllInvoices = async ({
   const offset = args.offset;
   let whereSearch = {};
 
-  let findId =
-    typeof args.search === "string"
-      ? args.search.replace(/\D/g, "")
-      : args.search;
+  let findId: string | number =
+  typeof args.search === "string"
+    ? args.search.replace(/\D/g, "")
+    : args.search;
 
+  if (typeof findId === "string" && findId !== "") {
+    findId = parseInt(findId);
+  }
 
   if (args.search) {
     whereSearch = {
       OR: [
         {
-          id:  (typeof findId === 'string' && findId !== '') ? parseInt(findId ?? 0) : 0
+          id:  findId
         },
         {
           Organization: {
