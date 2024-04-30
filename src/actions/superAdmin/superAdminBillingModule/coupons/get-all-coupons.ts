@@ -26,7 +26,7 @@ export const getAllCoupons = async ({
         {
           id:
             typeof findId === "string" && findId !== ""
-              ? parseInt(findId ?? 0)
+              ? parseInt(findId ?? '0')
               : 0,
         },
         {
