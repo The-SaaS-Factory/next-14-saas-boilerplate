@@ -14,11 +14,17 @@ export const getAllCoupons = async ({
   const limit = args.limit;
   const offset = args.offset;
   let whereSearch = {};
+  
+  let findId: string | number =
+  typeof args.search === "string"
+    ? args.search.replace(/\D/g, "")
+    : args.search;
 
-  let findId =
-    typeof args.search === "string"
-      ? args.search.replace(/\D/g, "")
-      : args.search;
+if (typeof findId === "string" && findId !== "") {
+  findId = parseInt(findId);
+}
+  
+
 
   if (args.search) {
     whereSearch = {
