@@ -59,8 +59,8 @@ Our vision is that a programmer with a regular job can, with this boilerplate, l
  - [x] Ticket Support Module
  - [x] Settings Module for Super Admins
  - [x] Marketing Module
- - [x] Stripe Invoices and memberships Module
- - [x] Imagekit Integration for Media Storage
+ - [x] Billing and subscriptions with Stripe Invoices and Multi-Currency support
+ - [x] Imagekit Integration for Media Storage 
  - [x] Internal components to help you create cruds quickly (newForm)
  - [x] User management
  - [x] Organization management
@@ -74,6 +74,8 @@ Our vision is that a programmer with a regular job can, with this boilerplate, l
  - [x] Role-based access control and permissions
  - [x] Absolute Imports using @ prefix
  - [x] Social Auth (Google, Facebook, Twitter, GitHub, Apple, and more) (Clerk)
+ - [x] Transactional emails (Loops.so)
+ - [x] Adding email addresses to newsletter lists (Loops.so)
  
  ## Some projects using this boilerplate
  
