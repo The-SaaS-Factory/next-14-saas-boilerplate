@@ -85,6 +85,8 @@ Our vision is that a programmer with a regular job can, with this boilerplate, l
  ## RoadMap
  - [ ] Improve typing
  - [ ] Add more documentation
+ - [ ] Add Blog Module
+ - [ ] Add Changelog Module
  
  ## Screenshots
  ![enter image description here](https://ik.imagekit.io/cluzstudio/01-cluzstudio/screely-1703716752301_xVVckTVwk.png?updatedAt=1703716824119)![enter image description here](https://ik.imagekit.io/cluzstudio/01-cluzstudio/screely-1703720465815_uSi8i2AMI.png?updatedAt=1703720616191)
