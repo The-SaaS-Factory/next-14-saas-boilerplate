@@ -61,6 +61,7 @@ export interface PricingSettingType {
 export interface PlanType {
   id: number;
   name: string;
+  freeTrialDays: number | null;
   stripeProductId: string | null;
   status: string;
   description: string | null;

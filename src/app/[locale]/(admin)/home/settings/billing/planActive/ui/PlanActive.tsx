@@ -3,6 +3,7 @@ import React from "react";
 import { Card, Flex, ProgressBar, Text } from "@tremor/react";
 import { PlanCapabilitieType } from "@/interfaces/userModule";
 import { CheckBadgeIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { useTranslations } from "next-intl";
 
 const PlanActive = ({
   planCapabilities,
@@ -11,7 +12,7 @@ const PlanActive = ({
   planCapabilities: PlanCapabilitieType[];
   usedCapabilities: any[];
 }) => {
-    
+  const t = useTranslations("AdminLayout.pages.plans");
   const getUserCountCapabilitie = (capabilitieId: number) => {
     const capabilitie = usedCapabilities?.find(
       (c: any) => c.capabilitieId === capabilitieId
@@ -23,15 +24,13 @@ const PlanActive = ({
     return (userCount * 100) / planCount;
   };
 
- 
-
   return (
     <div>
       <Card className="my-7">
         {planCapabilities?.filter((c: any) => c.capabilitie?.type === "LIMIT")
           .length > 0 && (
           <div>
-            <h2 className="title">Current usage:</h2>
+            <h2 className="title">{t("currentUsage")}:</h2>
             <div className="grid mt-10 grid-cols-1 gap-4 lg:grid-cols-3">
               {planCapabilities
                 ?.filter((c: any) => c.capabilitie.type === "LIMIT")
@@ -57,11 +56,11 @@ const PlanActive = ({
                   </Flex>
                 ))}
             </div>
+            <hr className="my-7" />
           </div>
         )}
-        <hr className="my-7" />
         <div>
-          <h2 className="title">Plan features and limits:</h2>
+          <h2 className="title">{t("planFeaturesAndLImit")} :</h2>
           <ul
             role="list"
             className="divide-y my-3 grid grid-cols-2 lg:grid-cols-1 space-y-3 divide-gray-100"

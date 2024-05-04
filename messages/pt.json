@@ -3,9 +3,9 @@
     "title": "Olá mundo!"
   },
   "Onboarding": {
-    "welcome":  "Bem-vindo ao",
-    "completeOnboarding":  "Complete seu onboarding",
-    "redirecting":  "Redirecionando...",
+    "welcome": "Bem-vindo ao",
+    "completeOnboarding": "Complete seu onboarding",
+    "redirecting": "Redirecionando...",
     "organizationName": "Nome da organização"
   },
   "LocaleSwitcher": {
@@ -67,6 +67,14 @@
         "plansOfFidelityDescription": "Descrição dos planos de fidelidade",
         "paymentFrequency": "Frequência de pagamento",
         "buyPlan": "Comprar plano",
+        "congratulation": "Parabéns!",
+        "plan": "plano",
+        "activeUntil": "ativo até",
+        "change": "Trocar Plano",
+        "currentUsage": "Uso atual",
+        "planFeaturesAndLImit": "Recursos e limites do plano",
+        "activateTrialPlan": "Ativar plano de teste por {days} dias",
+        "trialPlanActivated": "Plano de teste ativado",
         "selectPaymentMethod": "Selecionar método de pagamento",
         "payWith": "Pagar com",
         "cancel": "Cancelar",

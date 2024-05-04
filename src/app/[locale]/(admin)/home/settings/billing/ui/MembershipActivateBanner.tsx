@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
 import useMembership from "@/app/hooks/useMembership";
+import { useTranslations } from "next-intl";
 const MembershipActivateBanner = () => {
-  
   const { membershipPlanName, membershipEndDate } = useMembership();
- 
+  const t = useTranslations("AdminLayout.pages.plans");
   return (
     <div className="relative isolate flex items-center gap-x-6 overflow-hidden bg-gray-50 px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
       {membershipPlanName && (
@@ -36,12 +36,12 @@ const MembershipActivateBanner = () => {
           <div className="flex items-center space-x-2">
             <p className="title">
               <span>
-                Congratulations, you have a
+              {t("congratulation")} 
                 <strong className="font-semibold pr-1">
                   {" "}
                   {membershipPlanName}
                 </strong>
-                plan
+                {t("plan")} 
                 <svg
                   viewBox="0 0 2 2"
                   className="mx-2 inline h-0.5 w-0.5 fill-current"
@@ -49,14 +49,14 @@ const MembershipActivateBanner = () => {
                 >
                   <circle cx={1} cy={1} r={1} />
                 </svg>
-                active until {membershipEndDate}
+                {t("activeUntil")}  {membershipEndDate}
               </span>
             </p>
             <Link
               href="/home/settings/billing/buyPlan"
               className="text-primary"
             >
-              <button className="btn-main">Change Plan</button>
+              <button className="btn-main">{t("change")} </button>
             </Link>
           </div>
           <div className="flex flex-1 justify-end"></div>

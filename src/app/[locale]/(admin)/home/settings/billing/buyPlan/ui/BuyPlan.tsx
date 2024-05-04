@@ -21,6 +21,8 @@ import { IPricing, PlanType } from "@/interfaces/billingModule";
 import { constants } from "@/lib/constants";
 import usePaymentMethods from "@/app/hooks/usePaymentMethods";
 import { useLocale, useTranslations } from "next-intl";
+import { toast } from "sonner";
+import { activateTrialPlan } from "@/actions/superAdmin/superAdminBillingModule/activate-trial-plan";
 export type SettingType = {
   settingName: string;
   settingValue: string;
@@ -89,6 +91,22 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
 
   const handleConvertCurrency = (price: number) => {
     return price * currencySelected.rate;
+  };
+
+  const handleActivateTrialPlan = async (planId: number, pricingId: number) => {
+    await activateTrialPlan({
+      planId,
+      pricingId,
+      currencyId: currencySelected.id,
+    })
+      .then(() => {
+        toast.success(t("trialPlanActivated"));
+        window.location.reload();
+        window.location.href = "/home/settings/billing/planActive";
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
 
   return (
@@ -268,20 +286,40 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                             )}
                           </ul>
 
-                          <button
-                            onClick={() => {
-                              setPlanSelected(tier);
-                              setSelectMethodModal(true);
-                            }}
-                            className={classNames(
-                              tier.mostPopular
-                                ? "bg-indigo-600 text-white shadow-sm hover:bg-indigo-500"
-                                : "text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300",
-                              "mt-6 block rounded-md py-2 px-3 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                          <div className="flex space-x-3">
+                            {plan.freeTrialDays > 0 && (
+                              <button
+                                onClick={() => {
+                                  handleActivateTrialPlan(plan.id, tier.id);
+                                }}
+                                className={classNames(
+                                  tier.mostPopular
+                                    ? "bg-indigo-600 text-white shadow-sm hover:bg-indigo-500"
+                                    : "text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300",
+                                  "mt-6 block rounded-md py-2 px-3 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                )}
+                              >
+                                {t("activateTrialPlan", {
+                                  days: plan.freeTrialDays,
+                                })}{" "}
+                              </button>
                             )}
-                          >
-                            {t("buyPlan")}{" "}
-                          </button>
+
+                            <button
+                              onClick={() => {
+                                setPlanSelected(tier);
+                                setSelectMethodModal(true);
+                              }}
+                              className={classNames(
+                                tier.mostPopular
+                                  ? "bg-indigo-600 text-white shadow-sm hover:bg-indigo-500"
+                                  : "text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300",
+                                "mt-6 block rounded-md py-2 px-3 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                              )}
+                            >
+                              {t("buyPlan")}{" "}
+                            </button>
+                          </div>
                         </div>
                       </div>
                     ));

@@ -29,8 +29,10 @@ const AdminPlanActive = ({
 
   useEffect(() => {
     if (organization) {
+      console.log(organization.publicMetadata?.membershipPlan);
+      
       if (!organization.publicMetadata?.membershipPlan) {
-        //return to /buyplan
+        //return to /buypland
         router.push("buyPlan", { scroll: false });
       }
 
@@ -50,7 +52,7 @@ const AdminPlanActive = ({
   }, [organization, router]);
 
   useEffect(() => {
-    if (user) {
+    if (!organization && user) {
       if (!user.publicMetadata?.membershipPlan) {
         //return to /buyplan
         router.push("buyPlan", { scroll: false });
