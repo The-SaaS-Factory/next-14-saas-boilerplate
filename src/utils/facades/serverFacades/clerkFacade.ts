@@ -72,23 +72,41 @@ export const handleUpdateDataForUser = async ({
 }) => {
   const user = await getUserClerkId(userBdId);
   let userId: string | null = null;
+  let userType = "organization" as "organization" | "user";
 
   if (user) {
     userId = user.externalId;
+
+    //If start with "org_" is an organization
+    if (userId.startsWith("user_")) {
+      userType = "organization";
+    }
   }
 
   if (!userId) throw new Error("User not found");
 
   if (scope === "publicMetadata") {
-    await clerkClient.users.updateUserMetadata(userId, {
-      publicMetadata: data,
-    });
+    if (userType === "user") {
+      await clerkClient.users.updateUserMetadata(userId, {
+        publicMetadata: data,
+      });
+    } else {
+      await clerkClient.organizations.updateOrganizationMetadata(userId, {
+        publicMetadata: data,
+      });
+    }
   }
 
   if (scope === "privateMetadata") {
-    await clerkClient.users.updateUserMetadata(userId, {
-      privateMetadata: data,
-    });
+    if (userType === "user") {
+      await clerkClient.users.updateUserMetadata(userId, {
+        privateMetadata: data,
+      });
+    } else {
+      await clerkClient.organizations.updateOrganizationMetadata(userId, {
+        privateMetadata: data,
+      });
+    }
   }
 
   if (scope === "unsafeMetadata") {

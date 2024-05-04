@@ -16,6 +16,13 @@ const UpsertPlan = ({ planId, values }: { planId?: number; values?: any }) => {
       required: true,
     },
     {
+      name: "freeTrialDays",
+      label: "Free Trial Days",
+      type: "number",
+      hasLanguageSupport: false,
+      required: true,
+    },
+    {
       name: "status",
       label: "Status",
       type: "select",

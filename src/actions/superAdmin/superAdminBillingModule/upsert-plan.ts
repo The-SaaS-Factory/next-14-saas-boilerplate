@@ -27,11 +27,13 @@ export const upsertPlan = async ({
         name: payload.name,
         description: payload.description,
         status: payload.status,
+        freeTrialDays: payload.freeTrialDays,
       },
       create: {
         name: payload.name as string,
         description: payload.description as string,
         status: payload.status as string,
+        freeTrialDays: payload.freeTrialDays as number,
       },
     });
 

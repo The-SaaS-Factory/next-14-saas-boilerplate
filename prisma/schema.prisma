@@ -178,6 +178,7 @@ model Plan {
   id               Int                @id @default(autoincrement())
   name             String
   stripeProductId  String?
+  freeTrialDays    Int?
   status           String             @default("ACTIVE")
   description      String?            @db.Text
   Membership       Membership[]
