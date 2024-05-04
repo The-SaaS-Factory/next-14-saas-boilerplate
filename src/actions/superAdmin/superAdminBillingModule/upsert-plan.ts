@@ -16,6 +16,8 @@ export const upsertPlan = async ({
   const userClerk = auth();
   if (!userClerk) throw new Error("client clerk not found");
   const { permissions } = await getUser(userClerk);
+  
+  
 
   checkPermission(permissions, scope);
   try {

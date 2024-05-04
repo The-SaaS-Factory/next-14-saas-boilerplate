@@ -205,7 +205,6 @@ const NewForm = ({
             }
           } else {
             if (field.hasLanguageSupport) {
-              
               let parsedValue;
               try {
                 parsedValue = JSON.parse(values[fieldName]);
@@ -218,21 +217,15 @@ const NewForm = ({
                   ? parsedValue
                   : values[fieldName];
 
-              console.log(newValues);
-              console.log(field.name);
-
               locales.map((lang: string) => {
-                setValue(field.name + "_" + lang, newValues[lang]);
+                setValue(
+                  field.name + "_" + lang,
+                  newValues[lang] !== undefined ? newValues[lang] : newValues
+                );
               });
             } else {
               setValue(fieldName, values[fieldName]);
             }
-
-            // fields.forEach((field: any) => {
-            //   if (field.type === "select") {
-            //     setValue(field.name, field.options[0].optionValue);
-            //   }
-            // });
           }
         }
       }
@@ -256,8 +249,43 @@ const NewForm = ({
       </div>
     );
 
+  const getFielLabelInErrorCase = (key: string) => {
+    //Parse key, if have language support, remove _lang
+    let keyRaw = key;
+    if (keyRaw.includes("_")) {
+      key = key.split("_")[0];
+    }
+    const field = fields.find((f: any) => f.name === key);
+    return field
+      ? keyRaw.includes("_")
+        ? field.label + " (" + keyRaw.split("_")[1] + ")"
+        : field.label
+      : key;
+  };
+
   return (
     <>
+      <div>
+        {Object.keys(errors).length > 0 && (
+          <div className="bg-red-300 rounded-md p-3">
+            <div className="flex flex-col">
+              <p className="text-red-700 text-lg font-medium">Errors:</p>
+              <ul>
+                {Object.keys(errors).map((key, index) => (
+                  <li key={index} className="text-red-500">
+                    {getFielLabelInErrorCase(key)}:{" "}
+                    {errors[key]?.message ? (
+                      <span>{String(errors[key]?.message)}</span>  
+                    ) : (
+                      "Required"
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )}
+      </div>
       <form className="w-full" onSubmit={handleSubmit(action)}>
         <div className="space-y-12">
           <div
