@@ -27,7 +27,6 @@ export default async function completeOnboarding(payload: any) {
       throw new Error("Error creating organization");
     });
 
-  //Store now in your model the onboarding data and then, update the user metadata in clerk
   return await handleUpdateDataForUser({
     scope: "publicMetadata",
     userBdId: userId,

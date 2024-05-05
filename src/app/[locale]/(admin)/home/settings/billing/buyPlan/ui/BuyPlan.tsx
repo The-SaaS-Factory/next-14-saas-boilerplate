@@ -417,7 +417,7 @@ export function SelectPaymentMethod({
                           as="h3"
                           className="text-base font-semibold leading-6 text"
                         >
-                          {t("selectPaymentMethod")}
+                          {t("selectPaymentMethod")} {" "}
                           {currencySelected.name}
                         </Dialog.Title>
                       </div>

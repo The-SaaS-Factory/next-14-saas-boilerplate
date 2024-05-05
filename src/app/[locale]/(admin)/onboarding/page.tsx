@@ -26,7 +26,7 @@ export default function Example() {
           toast.success("Onboarding completed");
           setTimeout(() => {
             window.location.href = "/home";
-          },6000);
+          }, 6000);
         }
       })
       .catch((e) => {
