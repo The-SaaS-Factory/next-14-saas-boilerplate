@@ -237,6 +237,8 @@ export const stripeCreateCheckoutSession = async ({
   try {
     const stripe = await makeStripeClient();
     const urls = await getUrlsForRedirect(modelName);
+    console.log("urls", urls);
+    
     let sessionPayload: Stripe.Checkout.SessionCreateParams = {
       line_items: items,
       client_reference_id: referenceId,
