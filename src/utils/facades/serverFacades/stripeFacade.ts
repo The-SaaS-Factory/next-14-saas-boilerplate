@@ -265,7 +265,7 @@ const getUrlsForRedirect = async (modelName: string = 'PLAN') => {
 
   if (modelName === "PLAN") {
     return {
-      success_url: `${domain}/home/settings/profile?paymentStatus=success`,
+      success_url: `${domain}/home/settings/billing/planActive?paymentStatus=success`,
       cancel_url: `${domain}/home/settings/billing/buyPlan?paymentStatus=error`,
     };
   } else if (modelName === "SERVICE") {
