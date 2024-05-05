@@ -15,10 +15,12 @@ export default authMiddleware({
     "/test",
     "/api/clerk",
     "/api/stripe",
+    "/api/stripe",
     "/api/test",
     "/api/cron",
     "/:locale",
     "/:locale/api/clerk",
+    "/:locale/api/stripe",
     "/:locale/sign-in",
   ],
   beforeAuth(request) {
