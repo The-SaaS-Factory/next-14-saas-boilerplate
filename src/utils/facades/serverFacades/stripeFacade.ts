@@ -239,6 +239,7 @@ export const stripeCreateCheckoutSession = async ({
     const urls = await getUrlsForRedirect(modelName);
     console.log("urls", urls);
     
+    
     let sessionPayload: Stripe.Checkout.SessionCreateParams = {
       line_items: items,
       client_reference_id: referenceId,
@@ -259,7 +260,7 @@ export const stripeCreateCheckoutSession = async ({
   }
 };
 
-const getUrlsForRedirect = async (modelName: string) => {
+const getUrlsForRedirect = async (modelName: string = 'PLAN') => {
   const domain = await getSuperAdminSetting("PLATFORM_FRONTEND_URL");
 
   if (modelName === "PLAN") {
