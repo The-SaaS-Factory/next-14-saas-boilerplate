@@ -40,9 +40,7 @@ export default authMiddleware({
 
     // User isn't signed in and the route is private -- redirect to sign-in
     if (!userId && !auth.isPublicRoute) {
-      console.log(req.url);
       return redirectToSignIn({ returnBackUrl: req.url });
-
     }
       
 
