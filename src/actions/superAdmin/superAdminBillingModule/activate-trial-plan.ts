@@ -42,8 +42,5 @@ export const activateTrialPlan = async ({
     planId: plan.id,
   });
 
-  console.log(membership);
-  
-
   return membership;
 };

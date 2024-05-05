@@ -72,14 +72,14 @@ export const handleUpdateDataForUser = async ({
 }) => {
   const user = await getUserClerkId(userBdId);
   let userId: string | null = null;
-  let userType = "organization" as "organization" | "user";
+  let userType: "user" | "organization" = "organization";
 
   if (user) {
     userId = user.externalId;
 
     //If start with "org_" is an organization
     if (userId.startsWith("user_")) {
-      userType = "organization";
+      userType = "user";
     }
   }
 

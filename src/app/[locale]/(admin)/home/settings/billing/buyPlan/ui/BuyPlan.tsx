@@ -287,7 +287,7 @@ const PlansComponent = ({ plans, currencies, paymentMethods }: PageParams) => {
                           </ul>
 
                           <div className="flex space-x-3">
-                            {plan.freeTrialDays > 0 && (
+                            {plan.freeTrialDays && plan.freeTrialDays > 0 && (
                               <button
                                 onClick={() => {
                                   handleActivateTrialPlan(plan.id, tier.id);
