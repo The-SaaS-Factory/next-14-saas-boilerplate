@@ -19,7 +19,7 @@ Our vision is that a programmer with a regular job can, with this boilerplate, l
 
 **Super Admin Access**
   - Login as Normal User
-  - Make click on the "Access as Super Admin" button in the Header
+  - Make click on the "Access as Super Admin" button in the Header from personal profile
 
 **Stripe test card number**
   - 4242 4242 4242 4242
