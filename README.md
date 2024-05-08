@@ -59,7 +59,7 @@ Our vision is that a programmer with a regular job can, with this boilerplate, l
  - [x] Ticket Support Module
  - [x] Settings Module for Super Admins
  - [x] Marketing Module
- - [x] Billing and subscriptions with Stripe Invoices and Multi-Currency support
+ - [x] Billing and subscriptions with Stripe Invoices, Stripe Customer Portal and Multi-Currency support
  - [x] Imagekit Integration for Media Storage 
  - [x] Internal components to help you create cruds quickly (newForm)
  - [x] User management
