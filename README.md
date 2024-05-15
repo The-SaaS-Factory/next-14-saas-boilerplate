@@ -78,7 +78,8 @@ Our vision is that a programmer with a regular job can, with this boilerplate, l
  - [x] Adding email addresses to newsletter lists (Loops.so)
  
  ## Some projects using this boilerplate
- 
+
+ - [Monetizee](https://monetizee.online)
  - [HostingClan](https://hostingclan.com)
  - [WavesTravel](https://waves.travel)
 
