@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Tabs from "@/components/core/Tabs";
-import { UserGroupIcon, UsersIcon } from "@heroicons/react/24/outline";
+import { UserGroupIcon, UsersIcon, CreditCardIcon } from "@heroicons/react/24/outline";
 import { useOrganization, useUser } from "@clerk/nextjs";
 import { useTranslations } from "next-intl";
 
@@ -31,6 +31,11 @@ const SettingsTabs = () => {
           label: t("plansFidelity"),
           icon: UserGroupIcon,
         },
+        {
+          path: "/home/settings/profile/portal",
+          label: t("portal"),
+          icon: CreditCardIcon,
+        },
       ]);
     } else {
       setTabs([
@@ -38,6 +43,11 @@ const SettingsTabs = () => {
           path: "/home/settings/profile",
           label: t("profile"),
           icon: UsersIcon,
+        },
+        {
+          path: "/home/settings/profile/portal",
+          label: t("portal"),
+          icon: CreditCardIcon,
         },
       ]);
     }

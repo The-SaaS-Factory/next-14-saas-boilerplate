@@ -5,6 +5,7 @@ export const constants = {
   logoDarkUrl: "/assets/img/logo-next-14-dark.png",
   appResume: "The best boilerplate in Next 14.",
   demoMode: process.env.NEXT_PUBLIC_DEMO_MODE === "true",
+  portalStripe: process.env.NEXT_PUBLIC_STRIPE_PORTAL
 };
 
 export const sliderSettings = {

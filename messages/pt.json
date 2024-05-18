@@ -81,10 +81,14 @@
         "needLogin": "Você precisa fazer login para comprar um plano",
         "login": "Entrar"
       },
+      "memberships": {
+        "stripePortal": "Acesse seu portal Stripe"
+      },
       "settings": {
         "settings": "Configurações",
         "dashboard": "Painel",
         "profile": "Perfil",
+        "portal": "Gerencie suas assinaturas",
         "plansFidelity": "Planos de fidelidade"
       },
       "affiliates": {

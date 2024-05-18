@@ -19,7 +19,7 @@ Our vision is that a programmer with a regular job can, with this boilerplate, l
 
 **Super Admin Access**
   - Login as Normal User
-  - Make click on the "Access as Super Admin" button in the Header
+  - Make click on the "Access as Super Admin" button in the Header from personal profile
 
 **Stripe test card number**
   - 4242 4242 4242 4242
@@ -59,7 +59,7 @@ Our vision is that a programmer with a regular job can, with this boilerplate, l
  - [x] Ticket Support Module
  - [x] Settings Module for Super Admins
  - [x] Marketing Module
- - [x] Billing and subscriptions with Stripe Invoices and Multi-Currency support
+ - [x] Billing and subscriptions with Stripe Invoices, Stripe Customer Portal and Multi-Currency support
  - [x] Imagekit Integration for Media Storage 
  - [x] Internal components to help you create cruds quickly (newForm)
  - [x] User management
@@ -78,7 +78,8 @@ Our vision is that a programmer with a regular job can, with this boilerplate, l
  - [x] Adding email addresses to newsletter lists (Loops.so)
  
  ## Some projects using this boilerplate
- 
+
+ - [Monetizee](https://monetizee.online)
  - [HostingClan](https://hostingclan.com)
  - [WavesTravel](https://waves.travel)
 

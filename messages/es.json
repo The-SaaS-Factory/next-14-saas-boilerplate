@@ -85,6 +85,7 @@
         "settings": "Configuración",
         "dashboard": "Tablero",
         "profile": "Perfil",
+        "portal": "Gestiona tus suscripciones",
         "plansFidelity": "Planes de fidelidad"
       },
       "affiliates": {
@@ -97,6 +98,9 @@
         "referralLink": "Mi enlace de afiliado",
         "affiliatePanel": "Panel de afiliados",
         "referralLinkDescription": "Gana dinero recomendando nuestros servicios"
+      },
+      "memberships" : {
+        "stripePortal": "Accede a tu portal de Stripe"
       },
       "support": {
         "support": "Soporte",
