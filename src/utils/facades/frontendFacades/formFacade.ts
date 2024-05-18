@@ -33,15 +33,19 @@ export const parseSettingDataOnSubmit = async (data: any, fields: any) => {
           for (let i = 0; i < imagesCount; i++) {
             //image with base64 structure
             const image = images[i];
-
             const response = await saveImage(image);
-
             if (response) {
               const responseF = await response.json();
               valueFinal = fieldValue.replace(image, responseF.url);
             } else {
               valueFinal = fieldValue.replace(image, "");
             }
+          }
+        } else if (field.type === "file") {
+          const response = await saveImage(fieldValue);
+          if (response) {
+            const responseF = await response.json();
+            valueFinal = responseF.url;
           }
         } else if (field.type === "text") {
           valueFinal = fieldValue.toString();
@@ -91,6 +95,11 @@ export const parseDataOnSubmit = async (data: any, fields: Field[]) => {
     if (fieldValue !== undefined) {
       if (field.type === "number") {
         payload[fieldName] = parseFloat(fieldValue);
+      } else if (field.type === "file") {
+        const response = await saveImage(fieldValue);
+        if (response) {
+          payload[fieldName] = response.url;
+        }
       } else if (field.type === "image") {
         if (typeof fieldValue === "string" && fieldValue.includes("http")) {
           payload[fieldName] = fieldValue;

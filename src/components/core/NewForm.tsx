@@ -6,7 +6,9 @@ import { Switch, Tab } from "@headlessui/react";
 import { toast } from "sonner";
 import {
   ArchiveBoxArrowDownIcon,
+  PaperClipIcon,
   PhotoIcon,
+  XMarkIcon,
 } from "@heroicons/react/24/outline";
 import ImageUploading from "react-images-uploading";
 import { constants } from "@/lib/constants";
@@ -52,10 +54,6 @@ type FormProps = {
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
-
-const initialState = {
-  message: null,
-};
 
 const NewForm = ({
   values,
@@ -113,8 +111,6 @@ const NewForm = ({
 
     setLoading(false);
   };
-
-  const [state, formAction] = useFormState(onSubmit, initialState);
 
   const [newFieldData, setNewFieldData] = useState({
     name: "",
@@ -179,15 +175,6 @@ const NewForm = ({
           setValue(field.name, value.settingValue);
         }
       });
-
-      if (values.length === 0) {
-        //All fiel type select, set the first option
-        // fields.forEach((field: any) => {
-        //   if (field.type === "select") {
-        //     setValue(field.name, field.options[0].optionValue.toString());
-        //   }
-        // });
-      }
     } else if (typeof values === "object") {
       //When the form is not for settings
       for (const fieldName in values) {
@@ -275,7 +262,7 @@ const NewForm = ({
                   <li key={index} className="text-red-500">
                     {getFielLabelInErrorCase(key)}:{" "}
                     {errors[key]?.message ? (
-                      <span>{String(errors[key]?.message)}</span>  
+                      <span>{String(errors[key]?.message)}</span>
                     ) : (
                       "Required"
                     )}
@@ -618,6 +605,51 @@ const NewForm = ({
                     />
                   )}
 
+                  {field.type === "file" && (
+                    <>
+                      <div className="mt-2 sm:col-span-2 sm:mt-0">
+                        {!watch(field.name) ? (
+                          <div>
+                            <input
+                              type="file"
+                              onChange={(e) => {
+                                //Convert in base64
+                                const file = e.target.files[0];
+                                const reader = new FileReader();
+                                reader.readAsDataURL(file);
+
+                                reader.onload = () => {
+                                  console.log(reader.result);
+
+                                  setValue(field.name, reader.result);
+                                };
+                              }}
+                              id={field.name}
+                              className="input-text"
+                            />
+                          </div>
+                        ) : (
+                          <div>
+                            <div className="flex space-x-3">
+                              <span>Loaded</span>
+                              <button
+                                onClick={() => setValue(field.name, null)}
+                                className="icon "
+                              >
+                                <XMarkIcon className="h-5 w-5" />
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+                      {field.note && (
+                        <div className="italic ">
+                          <p className="text-sm text-gray-500">{field.note}</p>
+                        </div>
+                      )}
+                    </>
+                  )}
                   {field.type === "image" && (
                     <>
                       <ImageUploading
@@ -1136,6 +1168,7 @@ import {
 } from "@/utils/facades/frontendFacades/formFacade";
 import TableLoaderSkeleton from "../ui/loaders/TableLoaderSkeleton";
 import { locales } from "@/i18n";
+import Link from "next/link";
 
 export function MapSelector({
   openModal,
