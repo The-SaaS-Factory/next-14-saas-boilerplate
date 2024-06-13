@@ -4,7 +4,7 @@
   },
   "Onboarding": {
     "welcome": "Bienvenido a ",
-    "completeOnboarding": "Completa el onboarding",
+    "completeOnboarding": "Completa el Onboarding",
     "redirecting": "Redireccionando",
     "organizationName": "Nombre del proyecto"
   },
@@ -63,8 +63,8 @@
         "plans": "Planes",
         "addPlan": "Agregar plan",
         "pricing": "Precios",
-        "plansOfFidelity": "Planes de fidelidad en",
-        "plansOfFidelityDescription": "Descripción de planes de fidelidad",
+        "plansOfFidelity": "Planes de membresía en",
+        "plansOfFidelityDescription": "Descripción de planes de membresía",
         "paymentFrequency": "Frecuencia de pago",
         "buyPlan": "Comprar plan",
         "activateTrialPlan": "Prueba este plan por {days} días",
