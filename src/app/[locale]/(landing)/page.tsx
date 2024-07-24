@@ -6,7 +6,7 @@ import TestimonialMultiple from "./ui/TestimonialMultiple";
 export default function LandingPage({
   searchParams,
 }: {
-  searchParams: {
+  searchParams?: {
     aff: string;
   };
 }) {
@@ -25,7 +25,7 @@ export default function LandingPage({
       </div>{" "}
   
        
-      <AffiliateHandler aff={searchParams.aff} currentUser={null} />
+      <AffiliateHandler aff={searchParams?.aff} currentUser={null} />
     </div>
   );
 }
