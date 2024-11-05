@@ -1,4 +1,3 @@
-import DemoNewVersionBanner from "@/components/ui/NewVersionDemo";
 import { NextIntlClientProvider, useMessages } from "next-intl";
 import React from "react";
 
