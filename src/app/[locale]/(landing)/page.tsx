@@ -2,6 +2,7 @@ import HeroLanding from "@/components/ui/commons/HeroLanding";
 import AffiliateHandler from "@/components/core/AffiliateHandler";
 import CTAOffer from "@/components/ui/commons/CTAOffer";
 import TestimonialMultiple from "./ui/TestimonialMultiple";
+import DemoNewVersionBanner from "@/components/ui/NewVersionDemo";
 
 export default function LandingPage({
   searchParams,
@@ -13,6 +14,7 @@ export default function LandingPage({
   return (
     <div className="bg-sky-950">
       <HeroLanding />
+      <DemoNewVersionBanner />
       <div className="bg-white flex">
         <div className="hidden lg:flex   mx-auto">
           <TestimonialMultiple />

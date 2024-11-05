@@ -1,3 +1,4 @@
+import DemoNewVersionBanner from "@/components/ui/NewVersionDemo";
 import { NextIntlClientProvider, useMessages } from "next-intl";
 import React from "react";
 
@@ -14,7 +15,7 @@ export default function LocaleLayout({
     <html lang={locale}>
       <body>
         <NextIntlClientProvider messages={messages}>
-          {children}
+           {children}
         </NextIntlClientProvider>
       </body>
     </html>

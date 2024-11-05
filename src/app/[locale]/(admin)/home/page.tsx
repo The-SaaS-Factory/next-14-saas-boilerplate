@@ -11,6 +11,7 @@ import AffiliateHandler from "@/components/core/AffiliateHandler";
 import { getUserDB } from "@/actions/admin/userModule/get-user-DB";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import DemoNewVersionBanner from "@/components/ui/NewVersionDemo";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -44,6 +45,7 @@ const SuperAdminDashboardPage = async () => {
   return (
     <div>
       <PageName name={t("title")} />
+      <DemoNewVersionBanner />
       <Suspense fallback={<PageLoader />}>
         <Card className=" my-7">
           <Flex>
